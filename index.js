@@ -152,12 +152,12 @@ app.get("/:id", function(req, res) {
         `INSERT INTO refs (link_id, lang, browser_name, os_name, versionName, platType, referrer, full_ua, timeHit) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           rows[0].id,
-          "en",
+           req.headers["accept-language"],
           Browser.browser.name,
           Browser.os.name,
           Browser.os.versionName,
           Browser.platform.type,
-          "undefined",
+          req.headers.referer,
 
           req.headers["user-agent"],
           Math.floor(new Date().getTime() / 1000),
