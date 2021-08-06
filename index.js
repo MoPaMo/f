@@ -104,7 +104,7 @@ app.get("/:id", function (req, res) {
       db.run(
         `INSERT INTO refs (link_id, lang, browser_name, os_name, versionName, platType, referrer, full_ua, timeHit) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
-          rows[0],
+          rows[0].id,
           "en",
           Browser.browser.name,
           Browser.os.name,
