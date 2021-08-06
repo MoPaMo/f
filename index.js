@@ -20,6 +20,14 @@ app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "/views/login.html"));}
 
 });
+app.post("/", function(req,res){
+  if(req.body.pwd&&req.body.pwd==process.env.pwd){
+  res.cookie("pwd", req.body.pwd),
+res.redirect("/")}
+  else {
+    res.redirect("/")
+  }
+})
 app.use("/static", express.static(path.join(__dirname, "/static")));
 app.get("/:id", function (req, res) {
   let id = req.params.id;
