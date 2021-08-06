@@ -8,7 +8,7 @@ const sqlite3 = require("sqlite3").verbose();
 const cookieParser = require("cookie-parser");
 const bowser = require("bowser");
 
-const renderFile = function (path, data, cb) {
+const renderFile = function(path, data, cb) {
   fs.readFile(path, (err, buff) => {
     // if any error
     if (err) {
@@ -25,7 +25,9 @@ const renderFile = function (path, data, cb) {
 require("./pwd.js");
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+  extended: true
+}));
 // open the database
 let db = new sqlite3.Database("./db/db.db", sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
@@ -34,7 +36,7 @@ let db = new sqlite3.Database("./db/db.db", sqlite3.OPEN_READWRITE, (err) => {
   console.log("Connected to the database.");
 });
 
-app.get("/", function (req, res) {
+app.get("/", function(req, res) {
   if (req.cookies.pwd && req.cookies.pwd === process.env.pwd) {
     if (req.query.page) {
       if (req.query.page == "add") {
@@ -45,18 +47,46 @@ app.get("/", function (req, res) {
             `SELECT * FROM links WHERE token=?`,
             [req.query.token],
             (err, rows) => {
-              if(err) return console.log(err)//abort if error
+              if (err) return console.log(err) //abort if error
               db.all(
-                `SELECT * FROM refs WHERE link_id=?`,
+                `SELECT * FROM refs WHERE link_id=? LIMIT 5;`,
                 [rows[0].id],
                 (err2, rows2) => {
+                  db.get(
+                    `SELECT COUNT(id) FROM refs WHERE link_id=?;`,
+                    [rows[0].id],
+                    (err3, rows3) => {
+                      console.log(rows3);
                   renderFile(
-                    "views/detail.html",
-                    { token: req.query.token, url: rows[0].url,links:rows2 },
-                    function (a) {
+                    "views/detail.html", {
+                      basicData:rows[0],
+                      token: req.query.token,
+                      url: rows[0].url,
+                      links: rows2,
+                      count:rows3[`COUNT(id)`],
+                      convDate: function() {
+
+                        return new Date(this.timeHit*1000)
+                      },
+                      platform: function() {
+
+                        switch (this.platType){
+                          case "mobile":
+                          return 'Mobile'
+                          break;
+                          case "desktop":
+                          return 'Desktop'
+                          break;
+                          default:
+                          return 'Unknown'
+                        }
+
+                      }
+                    },
+                    function(a) {
                       res.send(a);
                     }
-                  );
+                  );})
                 }
               );
             }
@@ -74,7 +104,7 @@ app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "/views/login.html"));
   }
 });
-app.post("/", function (req, res) {
+app.post("/", function(req, res) {
   if (req.body.pwd && req.body.pwd == process.env.pwd) {
     res.cookie("pwd", req.body.pwd);
     res.redirect("/");
@@ -88,7 +118,7 @@ app.post("/", function (req, res) {
             req.body.url,
             Math.floor(new Date().getTime() / 1000),
           ],
-          function (err) {
+          function(err) {
             if (err) {
               res.redirect("/");
 
@@ -111,7 +141,7 @@ app.post("/", function (req, res) {
   }
 });
 app.use("/static", express.static(path.join(__dirname, "/static")));
-app.get("/:id", function (req, res) {
+app.get("/:id", function(req, res) {
   let id = req.params.id;
   db.all(`SELECT url, id FROM links WHERE token=?`, [id], (err, rows) => {
     //console.log(JSON.stringify(rows));
@@ -132,7 +162,7 @@ app.get("/:id", function (req, res) {
           req.headers["user-agent"],
           Math.floor(new Date().getTime() / 1000),
         ],
-        function (err) {
+        function(err) {
           if (err) {
             return console.log(err.message);
           }
@@ -148,7 +178,7 @@ app.get("/:id", function (req, res) {
   });
 });
 
-app.listen(port, function (err) {
+app.listen(port, function(err) {
   if (err) console.log(err);
   console.log("Server listening on PORT", port);
 });

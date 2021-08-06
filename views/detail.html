@@ -408,7 +408,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Token</h5>
-                      <span class="h2 font-weight-bold mb-0">{{token}}</span>
+                      <a class="h2 font-weight-bold mb-0" href="/{{token}}">{{token}}</a>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -490,7 +490,98 @@
               </div>
             </div>
           </div>
-          
+
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col-xl-8">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Last 5 Referrals</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">OS</th>
+                    <th scope="col">Browser</th>
+                    <th scope="col">Plattform Type</th>
+                    <th scope="col">Referrer</th>
+                    <th scope="col">Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#links}}
+                    <tr>
+                      <th scope="row">
+                        {{os_name}} {{versionName}}
+                      </th>
+                      <td>
+                        {{browser_name}}
+                      </td>
+                      <td>
+                        {{platform}}
+                      </td>
+                      <td>
+                        {{referrer}}
+                      </td>
+                      <td>
+                        {{convDate}}
+                      </td>
+                    </tr>
+                  {{/links}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Social traffic</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+
+                <tbody>
+                  <tr>
+                    <th>URL</th>
+                    <td>{{url}}</td>
+                  </tr>
+                  <tr>
+                    <th>Database ID</th>
+                    <td>{{basicData.id}}</td>
+                  </tr>
+                  <tr>
+                    <th>Creation Date</th>
+                    <td>{{basicData.created}}</td>
+                  </tr>
+                  <tr>
+                    <th>Total Referrals</th>
+                    <td>{{count}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -538,14 +629,15 @@
   <!-- Argon JS -->
   <script src="static/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
-  $(function(){
-    $("#basic-addon3").html(location.hostname+"/")
-$("#tokenInput").on("keyup",function(){
-if($("#tokenInput").val().length>10){
-  $("#emailHelp").html("It's called a URL <em>shortner </em> <i class=\"ni ni-scissors\"></i>")}
-})
-    //emailHelp
-  })
+    $(function() {
+      $("#basic-addon3").html(location.hostname + "/")
+      $("#tokenInput").on("keyup", function() {
+        if ($("#tokenInput").val().length > 10) {
+          $("#emailHelp").html("It's called a URL <em>shortner </em> <i class=\"ni ni-scissors\"></i>")
+        }
+      })
+      //emailHelp
+    })
   </script>
 </body>
 
