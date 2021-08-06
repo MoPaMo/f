@@ -39,6 +39,9 @@ app.post("/", function (req, res) {
   if (req.body.pwd && req.body.pwd == process.env.pwd) {
     res.cookie("pwd", req.body.pwd);
     res.redirect("/");
+  }else if (req.body.context=="add") {
+    res.redirect("/");
+    console.log(req.body)
   } else {
     res.redirect("/");
   }
