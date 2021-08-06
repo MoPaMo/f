@@ -3,7 +3,7 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT != undefined ? process.env.PORT : 8080;
 const sqlite3 = require("sqlite3").verbose();
-const cookie = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 app.use(cookieParser())
 // open the database
 let db = new sqlite3.Database("./db/db.db", sqlite3.OPEN_READWRITE, (err) => {
