@@ -40,13 +40,30 @@ app.get("/", function (req, res) {
       if (req.query.page == "add") {
         res.sendFile(path.join(__dirname, "/views/add.html"));
       } else if (req.query.page == "detail") {
-        renderFile(
-          "views/detail.html",
-          { name: "HI", token: "test", url: "https://example.com" },
-          function (a) {
-            res.send(a);
-          }
-        );
+        if (req.query.token) {
+          db.all(
+            `SELECT * FROM links WHERE token=?`,
+            [req.query.token],
+            (err, rows) => {
+              if(err) return console.log(err)//abort if error
+              db.all(
+                `SELECT * FROM refs WHERE link_id=?`,
+                [rows[0].id],
+                (err2, rows2) => {
+                  renderFile(
+                    "views/detail.html",
+                    { token: req.query.token, url: rows[0].url,links:rows2 },
+                    function (a) {
+                      res.send(a);
+                    }
+                  );
+                }
+              );
+            }
+          );
+        } else {
+          res.sendFile(path.join(__dirname, "/views/404.html"));
+        }
       } else {
         res.sendFile(path.join(__dirname, "/views/index.html"));
       }
