@@ -57,36 +57,37 @@ app.get("/", function(req, res) {
                     [rows[0].id],
                     (err3, rows3) => {
                       console.log(rows3);
-                  renderFile(
-                    "views/detail.html", {
-                      basicData:rows[0],
-                      token: req.query.token,
-                      url: rows[0].url,
-                      links: rows2,
-                      count:rows3[`COUNT(id)`],
-                      convDate: function() {
+                      renderFile(
+                        "views/detail.html", {
+                          basicData: rows[0],
+                          token: req.query.token,
+                          url: rows[0].url,
+                          links: rows2,
+                          count: rows3[`COUNT(id)`],
+                          convDate: function() {
 
-                        return new Date(this.timeHit*1000)
-                      },
-                      platform: function() {
+                            return new Date(this.timeHit * 1000)
+                          },
+                          platform: function() {
 
-                        switch (this.platType){
-                          case "mobile":
-                          return 'Mobile'
-                          break;
-                          case "desktop":
-                          return 'Desktop'
-                          break;
-                          default:
-                          return 'Unknown'
+                            switch (this.platType) {
+                              case "mobile":
+                                return 'Mobile'
+                                break;
+                              case "desktop":
+                                return 'Desktop'
+                                break;
+                              default:
+                                return 'Unknown'
+                            }
+
+                          }
+                        },
+                        function(a) {
+                          res.send(a);
                         }
-
-                      }
-                    },
-                    function(a) {
-                      res.send(a);
-                    }
-                  );})
+                      );
+                    })
                 }
               );
             }
@@ -94,6 +95,22 @@ app.get("/", function(req, res) {
         } else {
           res.sendFile(path.join(__dirname, "/views/404.html"));
         }
+      } else if (req.query.page == "allRefs") {
+        db.all(
+          `SELECT * FROM refs ORDER BY timeHit DESC LIMIT 250;`,
+          [],
+          (err, rows) => {
+            if (err) console.log(err);
+            renderFile(path.join(__dirname, "/views/allrefs.html"), {
+              links: rows,  convDate: function() {
+
+                  return new Date(this.timeHit * 1000)
+                },
+            }, (a) => {
+              res.send(a)
+            })
+          });
+
       } else {
         res.sendFile(path.join(__dirname, "/views/index.html"));
       }
@@ -152,7 +169,7 @@ app.get("/:id", function(req, res) {
         `INSERT INTO refs (link_id, lang, browser_name, os_name, versionName, platType, referrer, full_ua, timeHit) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           rows[0].id,
-           req.headers["accept-language"],
+          req.headers["accept-language"],
           Browser.browser.name,
           Browser.os.name,
           Browser.os.versionName,
