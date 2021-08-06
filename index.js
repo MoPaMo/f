@@ -5,6 +5,8 @@ const port = process.env.PORT != undefined ? process.env.PORT : 8080;
 const sqlite3 = require("sqlite3").verbose();
 const cookieParser = require('cookie-parser');
 app.use(cookieParser())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 // open the database
 let db = new sqlite3.Database("./db/db.db", sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
@@ -21,8 +23,10 @@ app.get("/", function (req, res) {
 
 });
 app.post("/", function(req,res){
+  console.log(req.body);
+    res.cookie("pwd", req.body.pwd);
   if(req.body.pwd&&req.body.pwd==process.env.pwd){
-  res.cookie("pwd", req.body.pwd),
+  res.cookie("pwd", req.body.pwd);
 res.redirect("/")}
   else {
     res.redirect("/")
