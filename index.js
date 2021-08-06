@@ -49,7 +49,7 @@ app.get("/", function(req, res) {
             (err, rows) => {
               if (err) return console.log(err) //abort if error
               db.all(
-                `SELECT * FROM refs WHERE link_id=? LIMIT 5;`,
+                `SELECT * FROM refs WHERE link_id=? ORDER BY timeHit DESC LIMIT 5;`,
                 [rows[0].id],
                 (err2, rows2) => {
                   db.get(
