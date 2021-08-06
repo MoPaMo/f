@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT != undefined ? process.env.PORT : 8080;
 const sqlite3 = require("sqlite3").verbose();
 const cookieParser = require('cookie-parser');
+require("./pwd.js")
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
