@@ -18,6 +18,18 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/views/index.html'));
 });
 app.use('/static', express.static(path.join(__dirname, '/static')));
+app.get("/:id", function(req, res){
+let id=req.params.id
+db.all(`SELECT url FROM links WHERE token=?`, [id], (err, rows) => {
+  console.log(JSON.stringify(rows));
+  if(rows.length&& rows[0].url){
+  res.redirect(rows[0].url)}
+  else {
+    res.sendFile(path.join(__dirname, '/views/404.html'));
+  }
+})
+})
+
 app.listen(port, function(err){
     if (err) console.log(err);
     console.log("Server listening on PORT", port);
