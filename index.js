@@ -1,12 +1,27 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const mustache = require('mustache');
+const mustache = require("mustache");
 const app = express();
 const port = process.env.PORT != undefined ? process.env.PORT : 8080;
 const sqlite3 = require("sqlite3").verbose();
 const cookieParser = require("cookie-parser");
-const bowser = require('bowser');
+const bowser = require("bowser");
+
+const renderFile = function (path, data, cb) {
+  fs.readFile(path, (err, buff) => {
+    // if any error
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      console.log(buff);
+      let text = buff.toString();
+      console.log(text);
+      cb(mustache.render(text, data))
+    }
+  });
+};
 require("./pwd.js");
 app.use(cookieParser());
 app.use(express.json());
@@ -22,13 +37,14 @@ let db = new sqlite3.Database("./db/db.db", sqlite3.OPEN_READWRITE, (err) => {
 app.get("/", function (req, res) {
   if (req.cookies.pwd && req.cookies.pwd === process.env.pwd) {
     if (req.query.page) {
-      switch (req.query.page) {
-        case "add":
-          res.sendFile(path.join(__dirname, "/views/add.html"));
-
-          break;
-        default:
-          res.sendFile(path.join(__dirname, "/views/index.html"));
+      if (req.query.page == "add") {
+        res.sendFile(path.join(__dirname, "/views/add.html"));
+      } else if (req.query.page == "detail") {
+        renderFile("views/detail.html", { name: "HI" }, function (a) {
+          res.send(a);
+        });
+      } else {
+        res.sendFile(path.join(__dirname, "/views/index.html"));
       }
     } else {
       res.sendFile(path.join(__dirname, "/views/index.html"));
@@ -63,9 +79,8 @@ app.post("/", function (req, res) {
             return;
           }
         );
-      }else {
+      } else {
         res.redirect("/?page=add");
-
       }
     } else {
       res.redirect("/");
@@ -80,7 +95,7 @@ app.get("/:id", function (req, res) {
   db.all(`SELECT url FROM links WHERE token=?`, [id], (err, rows) => {
     console.log(JSON.stringify(rows));
     if (rows.length && rows[0].url) {
-      console.log(bowser.parse(req.headers['user-agent']));
+      console.log(bowser.parse(req.headers["user-agent"]));
       res.redirect(rows[0].url);
     } else {
       res.sendFile(path.join(__dirname, "/views/404.html"));
