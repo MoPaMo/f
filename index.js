@@ -14,7 +14,11 @@ let db = new sqlite3.Database("./db/db.db", sqlite3.OPEN_READWRITE, (err) => {
 });
 
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "/views/index.html"));
+    if(req.cookies.pwd&&req.cookies.pwd===process.env.pwd){
+  res.sendFile(path.join(__dirname, "/views/index.html"));}
+  else {
+    res.sendFile(path.join(__dirname, "/views/login.html"));}
+
 });
 app.use("/static", express.static(path.join(__dirname, "/static")));
 app.get("/:id", function (req, res) {
