@@ -36,8 +36,6 @@ app.get("/", function (req, res) {
   }
 });
 app.post("/", function (req, res) {
-  console.log(req.body);
-  res.cookie("pwd", req.body.pwd);
   if (req.body.pwd && req.body.pwd == process.env.pwd) {
     res.cookie("pwd", req.body.pwd);
     res.redirect("/");
