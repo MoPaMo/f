@@ -18,7 +18,7 @@ const renderFile = function (path, data, cb) {
       //console.log(buff);
       let text = buff.toString();
       //console.log(text);
-      cb(mustache.render(text, data))
+      cb(mustache.render(text, data));
     }
   });
 };
@@ -40,9 +40,13 @@ app.get("/", function (req, res) {
       if (req.query.page == "add") {
         res.sendFile(path.join(__dirname, "/views/add.html"));
       } else if (req.query.page == "detail") {
-        renderFile("views/detail.html", { name: "HI", token:'test',url:'https://example.com' }, function (a) {
-          res.send(a);
-        });
+        renderFile(
+          "views/detail.html",
+          { name: "HI", token: "test", url: "https://example.com" },
+          function (a) {
+            res.send(a);
+          }
+        );
       } else {
         res.sendFile(path.join(__dirname, "/views/index.html"));
       }
@@ -92,10 +96,34 @@ app.post("/", function (req, res) {
 app.use("/static", express.static(path.join(__dirname, "/static")));
 app.get("/:id", function (req, res) {
   let id = req.params.id;
-  db.all(`SELECT url FROM links WHERE token=?`, [id], (err, rows) => {
+  db.all(`SELECT url, id FROM links WHERE token=?`, [id], (err, rows) => {
     //console.log(JSON.stringify(rows));
     if (rows.length && rows[0].url) {
-      console.log(bowser.parse(req.headers["user-agent"]));
+      let Browser = bowser.parse(req.headers["user-agent"]);
+      console.log(Browser);
+      db.run(
+        `INSERT INTO refs (link_id, lang, browser_name, os_name, versionName, platType, referrer, full_ua, timeHit) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+          rows[0],
+          "en",
+          Browser.browser.name,
+          Browser.os.name,
+          Browser.os.versionName,
+          Browser.platform.type,
+          "undefined",
+
+          req.headers["user-agent"],
+          Math.floor(new Date().getTime() / 1000),
+        ],
+        function (err) {
+          if (err) {
+            return console.log(err.message);
+          }
+          // get the last insert id
+          console.log(`A row has been inserted with rowid ${this.lastID}`);
+          return;
+        }
+      );
       res.redirect(rows[0].url);
     } else {
       res.sendFile(path.join(__dirname, "/views/404.html"));
