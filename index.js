@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT != undefined ? process.env.PORT : 8080;
 const sqlite3 = require("sqlite3").verbose();
 const cookieParser = require("cookie-parser");
+const bowser = require('bowser');
 require("./pwd.js");
 app.use(cookieParser());
 app.use(express.json());
@@ -77,6 +78,7 @@ app.get("/:id", function (req, res) {
   db.all(`SELECT url FROM links WHERE token=?`, [id], (err, rows) => {
     console.log(JSON.stringify(rows));
     if (rows.length && rows[0].url) {
+      console.log(bowser.parse(req.headers['user-agent']));
       res.redirect(rows[0].url);
     } else {
       res.sendFile(path.join(__dirname, "/views/404.html"));
