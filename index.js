@@ -21,12 +21,11 @@ app.get("/", function (req, res) {
     if (req.query.page) {
       switch (req.query.page) {
         case "add":
-        res.sendFile(path.join(__dirname, "/views/add.html"));
+          res.sendFile(path.join(__dirname, "/views/add.html"));
 
           break;
         default:
-        res.sendFile(path.join(__dirname, "/views/index.html"));
-
+          res.sendFile(path.join(__dirname, "/views/index.html"));
       }
     } else {
       res.sendFile(path.join(__dirname, "/views/index.html"));
@@ -39,9 +38,35 @@ app.post("/", function (req, res) {
   if (req.body.pwd && req.body.pwd == process.env.pwd) {
     res.cookie("pwd", req.body.pwd);
     res.redirect("/");
-  }else if (req.body.context=="add") {
-    res.redirect("/");
-    console.log(req.body)
+  } else if (req.body.context == "add") {
+    if (req.cookies.pwd && req.cookies.pwd === process.env.pwd) {
+      if (req.body.token && req.body.url) {
+        db.run(
+          `INSERT INTO links (token, url, created) VALUES(?, ?, ?)`,
+          [
+            req.body.token,
+            req.body.url,
+            Math.floor(new Date().getTime() / 1000),
+          ],
+          function (err) {
+            if (err) {
+              res.redirect("/");
+
+              return console.log(err.message);
+            }
+            // get the last insert id
+            console.log(`A row has been inserted with rowid ${this.lastID}`);
+            res.redirect("/");
+            return;
+          }
+        );
+      }else {
+        res.redirect("/?page=add");
+
+      }
+    } else {
+      res.redirect("/");
+    }
   } else {
     res.redirect("/");
   }
