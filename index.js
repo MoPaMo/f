@@ -15,9 +15,9 @@ const renderFile = function (path, data, cb) {
       console.log(err);
       return;
     } else {
-      console.log(buff);
+      //console.log(buff);
       let text = buff.toString();
-      console.log(text);
+      //console.log(text);
       cb(mustache.render(text, data))
     }
   });
@@ -40,7 +40,7 @@ app.get("/", function (req, res) {
       if (req.query.page == "add") {
         res.sendFile(path.join(__dirname, "/views/add.html"));
       } else if (req.query.page == "detail") {
-        renderFile("views/detail.html", { name: "HI" }, function (a) {
+        renderFile("views/detail.html", { name: "HI", token:'test',url:'https://example.com' }, function (a) {
           res.send(a);
         });
       } else {
@@ -93,7 +93,7 @@ app.use("/static", express.static(path.join(__dirname, "/static")));
 app.get("/:id", function (req, res) {
   let id = req.params.id;
   db.all(`SELECT url FROM links WHERE token=?`, [id], (err, rows) => {
-    console.log(JSON.stringify(rows));
+    //console.log(JSON.stringify(rows));
     if (rows.length && rows[0].url) {
       console.log(bowser.parse(req.headers["user-agent"]));
       res.redirect(rows[0].url);
