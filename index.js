@@ -3,9 +3,9 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT != undefined ? process.env.PORT : 8080;
 const sqlite3 = require("sqlite3").verbose();
-const cookieParser = require('cookie-parser');
-require("./pwd.js")
-app.use(cookieParser())
+const cookieParser = require("cookie-parser");
+require("./pwd.js");
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // open the database
@@ -17,22 +17,34 @@ let db = new sqlite3.Database("./db/db.db", sqlite3.OPEN_READWRITE, (err) => {
 });
 
 app.get("/", function (req, res) {
-    if(req.cookies.pwd&&req.cookies.pwd===process.env.pwd){
-  res.sendFile(path.join(__dirname, "/views/index.html"));}
-  else {
-    res.sendFile(path.join(__dirname, "/views/login.html"));}
+  if (req.cookies.pwd && req.cookies.pwd === process.env.pwd) {
+    if (req.query.page) {
+      switch (req.query.page) {
+        case "add":
+        res.sendFile(path.join(__dirname, "/views/add.html"));
 
-});
-app.post("/", function(req,res){
-  console.log(req.body);
-    res.cookie("pwd", req.body.pwd);
-  if(req.body.pwd&&req.body.pwd==process.env.pwd){
-  res.cookie("pwd", req.body.pwd);
-res.redirect("/")}
-  else {
-    res.redirect("/")
+          break;
+        default:
+        res.sendFile(path.join(__dirname, "/views/index.html"));
+
+      }
+    } else {
+      res.sendFile(path.join(__dirname, "/views/index.html"));
+    }
+  } else {
+    res.sendFile(path.join(__dirname, "/views/login.html"));
   }
-})
+});
+app.post("/", function (req, res) {
+  console.log(req.body);
+  res.cookie("pwd", req.body.pwd);
+  if (req.body.pwd && req.body.pwd == process.env.pwd) {
+    res.cookie("pwd", req.body.pwd);
+    res.redirect("/");
+  } else {
+    res.redirect("/");
+  }
+});
 app.use("/static", express.static(path.join(__dirname, "/static")));
 app.get("/:id", function (req, res) {
   let id = req.params.id;
