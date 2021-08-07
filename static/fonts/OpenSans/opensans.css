@@ -1,5 +1,6 @@
 /* latin-ext */
 @font-face {
+  font-display: swap;
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 300;
@@ -8,6 +9,7 @@
 }
 /* latin */
 @font-face {
+  font-display: swap;
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 300;
@@ -16,6 +18,7 @@
 }
 /* latin-ext */
 @font-face {
+  font-display: swap;
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
@@ -24,6 +27,7 @@
 }
 /* latin */
 @font-face {
+  font-display: swap;
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
@@ -32,6 +36,7 @@
 }
 /* latin-ext */
 @font-face {
+  font-display: swap;
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
@@ -40,6 +45,7 @@
 }
 /* latin */
 @font-face {
+  font-display: swap;
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
@@ -49,6 +55,7 @@
 
 /* latin-ext */
 @font-face {
+  font-display: swap;
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
@@ -57,6 +64,7 @@
 }
 /* latin */
 @font-face {
+  font-display: swap;
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
