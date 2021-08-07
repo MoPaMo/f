@@ -23,7 +23,7 @@ const renderFile = function (path, data, cb) {
   });
 };
 
-const loadHome = (res){
+const loadHome = (res)=>{
   db.all("SELECT COUNT (id) FROM links; ", (err, rows) => {
     if (err) console.log(err);
     db.all("SELECT COUNT (id) FROM refs;", (err2, rows2) => {
