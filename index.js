@@ -122,7 +122,7 @@ app.get("/", function (req, res) {
           db.all("SELECT COUNT (id) FROM refs;", (err2, rows2) => {
             if (err2) console.log(err2);
             db.all(
-              "SELECT os_name, COUNT(*) as a FROM refs GROUP BY os_name ORDER BY a DESC;",
+              "SELECT os_name||\" \"||versionName, COUNT(*) as a FROM refs GROUP BY os_name||\" \"||versionName ORDER BY a DESC;",
               (err3, rows3) => {
                 if (err3) console.log(err3);
                 console.log(rows3);
@@ -135,27 +135,11 @@ app.get("/", function (req, res) {
                     per_link: (
                       rows2[0][`COUNT (id)`] / rows[0][`COUNT (id)`]
                     ).toFixed(2),
-                    os_icon: function () {
-                      return function (text, render) {
-                        switch (render(text)) {
-                          case "Windows":
-                            return '<i class="fab fa-windows fa-2x"></i> Windows';
-                            break;
-                          case "iOS":
-                            return '<i class="fab fa-apple fa-2x"></i> iOS';
-                            break;
-                          case "MacOS":
-                            return '<i class="fab fa-apple fa-2x"></i> MacOS';
-                            break;
-                          case "Android":
-                            return '<i class="fab fa-android fa-2x"></i> Android';
-                            break;
-                          default:
-                            return '<i class="fas fa-question fa-2x"></i> Android';
-                        }
-                      };
+
+                      "fract": function () {
+                        return ((this.a/  rows2[0][`COUNT (id)`])*100).toFixed(2);
+                      }
                     },
-                  },
                   (a) => {
                     res.send(a);
                   }
