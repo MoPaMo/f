@@ -194,7 +194,9 @@ app.get("/:id", function(req, res) {
     }
   });
 });
-
+app.use(function(req, res) {
+  res.sendFile(`${__dirname}/views/404.html`, 404);
+});
 app.listen(port, function(err) {
   if (err) console.log(err);
   console.log("Server listening on PORT", port);
