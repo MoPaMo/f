@@ -1,3 +1,4 @@
+const dotenv = require("dotenv").config()
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
@@ -7,7 +8,6 @@ const port = process.env.PORT != undefined ? process.env.PORT : 8080;
 const sqlite3 = require("sqlite3").verbose();
 const cookieParser = require("cookie-parser");
 const bowser = require("bowser");
-
 const renderFile = function (path, data, cb) {
   fs.readFile(path, (err, buff) => {
     // if any error
