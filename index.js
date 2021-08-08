@@ -150,10 +150,12 @@ app.get("/", function (req, res) {
             );
           }
         );
-      } else {
+      }else if (req.query.page == "logout") {
+        res.clearCookie('pwd');  
+        res.redirect("/");    } else {// ?page=blank
         loadHome(res)
       }
-    } else {
+    } else {//no ?page
       loadHome(res)
     }
   } else {
