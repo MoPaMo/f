@@ -1,6 +1,4 @@
-# f
-
-##  a self hosted link shortner running on NodeJS and sqlite3
+![f logo](https://github.com/MoPaMo/f/blob/12bacf3ee55fc1e734acd4545aac92975022a81b/static/img/brand/banner.png?raw=true)
 
 ### DB structure
 
