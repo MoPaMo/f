@@ -8,6 +8,7 @@ const port = process.env.PORT != undefined ? process.env.PORT : 8080;
 const sqlite3 = require("sqlite3").verbose();
 const cookieParser = require("cookie-parser");
 const bowser = require("bowser");
+const async = require("async");
 const renderFile = function (path, data, cb) {
   fs.readFile(path, (err, buff) => {
     // if any error
@@ -151,7 +152,7 @@ app.get("/", function (req, res) {
           }
         );
       }else if (req.query.page == "logout") {
-        res.clearCookie('pwd');  
+        res.clearCookie('pwd');
         res.redirect("/");    } else {// ?page=blank
         loadHome(res)
       }
