@@ -42,9 +42,7 @@ const loadHome = (res) => {
     function linkCount(cb){
       db.all("SELECT COUNT (id) FROM links; ", (err, rows) => {
         if (err) console.log(err);
-        params.per_link= (
-          rows2[0][`COUNT (id)`] / rows[0][`COUNT (id)`]
-        ).toFixed(2);
+        params.links=rows[0][`COUNT (id)`]
         cb()
       })
     }
