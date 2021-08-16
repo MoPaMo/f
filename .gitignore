@@ -5,3 +5,4 @@ pwd.js
 .replit
 */*.db
 *\*.db
+node_modules
