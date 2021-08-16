@@ -6,3 +6,6 @@ pwd.js
 */*.db
 *\*.db
 node_modules
+*.db
+db/*
+db
