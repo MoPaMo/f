@@ -55,6 +55,17 @@ const loadHome = (res) => {
           cb()
         })
     },
+    function platType(cb) {
+          db.all(
+            'SELECT platType, COUNT(*) as a FROM refs GROUP BY platType ORDER BY a DESC;',
+            (err, rows) => {
+              if(err) console.log(err);
+              console.log(rows);
+              params.mostUsedPlat=rows[0].platType;
+              params.mostPlatFract=rows[0].a;
+              cb()
+            })
+        },
     function addfract(cb){
       params.fract= function () {
         return (this.a/  params.total_refs*100).toFixed(2);
