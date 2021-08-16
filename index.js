@@ -50,7 +50,7 @@ const loadHome = (res) => {
     }
   ], function (error) {
     renderFile(
-      path.join(__dirname, "/views/index.html"),params
+      path.join(__dirname, "/views/index.html"),params,
 
       (a) => {
         res.send(a);
@@ -75,8 +75,7 @@ const loadHome = (res) => {
         }
       );
     });*/
-  });
-};
+  }
 require("./pwd.js");
 app.use(cookieParser());
 app.use(express.json());
