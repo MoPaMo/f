@@ -24,20 +24,9 @@ const renderFile = function (path, data, cb) {
   });
 };
 
-const loadHome = (res)=>{
-  db.all("SELECT COUNT (id) FROM links; ", (err, rows) => {
-    if (err) console.log(err);
-    db.all("SELECT COUNT (id) FROM refs;", (err2, rows2) => {
-      if (err2) console.log(err2);
-      db.all(
-        "SELECT os_name||\" \"||versionName, COUNT(*) as a FROM refs GROUP BY os_name||\" \"||versionName ORDER BY a DESC;",
-        (err3, rows3) => {
-          if (err3) console.log(err3);
-          console.log(rows3);
-          renderFile(
-            path.join(__dirname, "/views/index.html"),
-            {
-              links: rows[0][`COUNT (id)`],
+const loadHome = (res) => {
+  let params = {
+    /*links: rows[0][`COUNT (id)`],
               total_refs: rows2[0][`COUNT (id)`],
               oses: rows3,
               per_link: (
@@ -46,17 +35,48 @@ const loadHome = (res)=>{
 
                 "fract": function () {
                   return ((this.a/  rows2[0][`COUNT (id)`])*100).toFixed(2);
-                }
-              },
+                }*/
+  };
+  async.waterfall([
+
+    function linkCount(cb){
+      db.all("SELECT COUNT (id) FROM links; ", (err, rows) => {
+        if (err) console.log(err);
+        params.per_link= (
+          rows2[0][`COUNT (id)`] / rows[0][`COUNT (id)`]
+        ).toFixed(2);
+        cb()
+      })
+    }
+  ], function (error) {
+    renderFile(
+      path.join(__dirname, "/views/index.html"),params
+
+      (a) => {
+        res.send(a);
+      }
+    );
+  });
+/*
+    db.all("SELECT COUNT (id) FROM refs;", (err2, rows2) => {
+      if (err2) console.log(err2);
+      db.all(
+        'SELECT os_name||" "||versionName, COUNT(*) as a FROM refs GROUP BY os_name||" "||versionName ORDER BY a DESC;',
+        (err3, rows3) => {
+          if (err3) console.log(err3);
+          console.log(rows3);
+          renderFile(
+            path.join(__dirname, "/views/index.html"),
+
             (a) => {
               res.send(a);
             }
           );
         }
       );
-    });
+    });*/
   });
-}
+};
 require("./pwd.js");
 app.use(cookieParser());
 app.use(express.json());
@@ -151,13 +171,16 @@ app.get("/", function (req, res) {
             );
           }
         );
-      }else if (req.query.page == "logout") {
-        res.clearCookie('pwd');
-        res.redirect("/");    } else {// ?page=blank
-        loadHome(res)
+      } else if (req.query.page == "logout") {
+        res.clearCookie("pwd");
+        res.redirect("/");
+      } else {
+        // ?page=blank
+        loadHome(res);
       }
-    } else {//no ?page
-      loadHome(res)
+    } else {
+      //no ?page
+      loadHome(res);
     }
   } else {
     //unauthorized, refer to login
