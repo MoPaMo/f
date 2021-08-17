@@ -76,7 +76,6 @@ const loadHome = (res) => {
   ], function (error) {
     renderFile(
       path.join(__dirname, "/views/index.html"),params,
-
       (a) => {
         res.send(a);
       }
@@ -181,6 +180,13 @@ app.get("/", function (req, res) {
       } else if (req.query.page == "logout") {
         res.clearCookie("pwd");
         res.redirect("/");
+      } else if (req.query.page == "search") {
+        renderFile(
+          path.join(__dirname, "/views/search.html"),{title:req.query.q, opt:req.query.opt, isref:req.query.opt=="refs",islink:(req.query.opt=="link"||req.query.opt=="")},
+          (a) => {
+            res.send(a);
+          }
+        );
       } else {
         // ?page=blank
         loadHome(res);

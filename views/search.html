@@ -21,11 +21,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="f is a free, open source, self hosted forwarding system using NodeJS and sqlite3. ">
   <meta name="author" content="MoPaMo">
-  <title>Search | f: the free, open source forwarding system</title>
+  <title>Search: {{title}} | f: the free, open source forwarding system</title>
   <!-- Favicon -->
   <link rel="icon" href="/static/img/brand/dark.ico" sizes="any"><!-- 32×32 -->
-<link rel="icon" href="/static/img/brand/responsive.min.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/static/img/brand/fav.png"><!-- 180×180 -->  <!-- Fonts -->
+  <link rel="icon" href="/static/img/brand/responsive.min.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/static/img/brand/fav.png"><!-- 180×180 -->
+  <!-- Fonts -->
   <link rel="stylesheet" href="/static/fonts/OpenSans/opensans.css">
   <!-- Icons -->
   <link rel="stylesheet" href="static/vendor/nucleo/css/nucleo.css" type="text/css">
@@ -155,7 +156,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-search"></i></span>
                 </div>
-                <input class="form-control" placeholder="Search" type="text">
+                <input class="form-control" placeholder="Search" type="text" value="{{title}}">
               </div>
             </div>
             <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
@@ -407,6 +408,19 @@
     </div>
     <!-- Page content -->
     <div class="container-fluid mt--6">
+      <div class="card"><br><br><br><br><br>
+        <div class="card-body">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link{{#islink}} active {{/islink}}  {{#isref}} disabled{{/isref}}" aria-current="page" href="#">Links</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{#isref}} actice{{/isref}}  {{#islink}} disabled{{/islink}}" href="?page=search&opt=refs&q={{title}}">Referrals</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
       <br><br><br><br><br>
       <!-- Footer -->
       <footer class="footer pt-0">
