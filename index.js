@@ -25,64 +25,60 @@ const renderFile = function (path, data, cb) {
 };
 
 const loadHome = (res) => {
-  let params = {
-  };
-  async.waterfall([
-
-    function linkCount(cb){
-      db.all("SELECT COUNT (id) FROM links; ", (err, rows) => {
-        if (err) console.log(err);
-        params.links=rows[0][`COUNT (id)`]
-        cb()
-      })
-    },
-    function refCount(cb){
-      db.all("SELECT COUNT (id) FROM refs;", (err, rows) => {
-        if (err) console.log(err);
-        params.total_refs=rows[0][`COUNT (id)`];
-        params.per_link=(
-          params.total_refs /params.links
-        ).toFixed(2);
-        cb()
-      })
-    },
-    function osCount(cb) {
-      db.all(
-        'SELECT os_name||" "||versionName, COUNT(*) as a FROM refs GROUP BY os_name||" "||versionName ORDER BY a DESC;',
-        (err, rows) => {
-          if(err) console.log(err);
-          params.oses=rows
-          cb()
-        })
-    },
-    function platType(cb) {
-          db.all(
-            'SELECT platType, COUNT(*) as a FROM refs GROUP BY platType ORDER BY a DESC;',
-            (err, rows) => {
-              if(err) console.log(err);
-              console.log(rows);
-              params.mostUsedPlat=rows[0].platType;
-              params.mostPlatFract=rows[0].a;
-              cb()
-            })
-        },
-    function addfract(cb){
-      params.fract= function () {
-        return (this.a/  params.total_refs*100).toFixed(2);
-      }
-      cb()
-    }
-
-  ], function (error) {
-    renderFile(
-      path.join(__dirname, "/views/index.html"),params,
-      (a) => {
+  let params = {};
+  async.waterfall(
+    [
+      function linkCount(cb) {
+        db.all("SELECT COUNT (id) FROM links; ", (err, rows) => {
+          if (err) console.log(err);
+          params.links = rows[0][`COUNT (id)`];
+          cb();
+        });
+      },
+      function refCount(cb) {
+        db.all("SELECT COUNT (id) FROM refs;", (err, rows) => {
+          if (err) console.log(err);
+          params.total_refs = rows[0][`COUNT (id)`];
+          params.per_link = (params.total_refs / params.links).toFixed(2);
+          cb();
+        });
+      },
+      function osCount(cb) {
+        db.all(
+          'SELECT os_name||" "||versionName, COUNT(*) as a FROM refs GROUP BY os_name||" "||versionName ORDER BY a DESC;',
+          (err, rows) => {
+            if (err) console.log(err);
+            params.oses = rows;
+            cb();
+          }
+        );
+      },
+      function platType(cb) {
+        db.all(
+          "SELECT platType, COUNT(*) as a FROM refs GROUP BY platType ORDER BY a DESC;",
+          (err, rows) => {
+            if (err) console.log(err);
+            console.log(rows);
+            params.mostUsedPlat = rows[0].platType;
+            params.mostPlatFract = rows[0].a;
+            cb();
+          }
+        );
+      },
+      function addfract(cb) {
+        params.fract = function () {
+          return ((this.a / params.total_refs) * 100).toFixed(2);
+        };
+        cb();
+      },
+    ],
+    function (error) {
+      renderFile(path.join(__dirname, "/views/index.html"), params, (a) => {
         res.send(a);
-      }
-    );
-  });
-
-  }
+      });
+    }
+  );
+};
 require("./pwd.js");
 app.use(cookieParser());
 app.use(express.json());
@@ -181,21 +177,21 @@ app.get("/", function (req, res) {
         res.clearCookie("pwd");
         res.redirect("/");
       } else if (req.query.page == "search") {
-let options={title:req.query.q, opt:req.query.opt, isref:req.query.opt=="refs",islink:(req.query.opt=="link"||req.query.opt=="")};
-        async.waterfall(
-[function getResFromDB(cb){
-
-}], function(error){
-
-        
-        renderFile(
-          path.join(__dirname, "/views/search.html"),options,
-          (a) => {
-
-
-            res.send(a);
-          }
-        );})
+        let options = {
+          title: req.query.q,
+          opt: req.query.opt,
+          isref: req.query.opt == "refs",
+          islink: req.query.opt == "link" || req.query.opt == "",
+        };
+        async.waterfall([function getResFromDB(cb) {}], function (error) {
+          renderFile(
+            path.join(__dirname, "/views/search.html"),
+            options,
+            (a) => {
+              res.send(a);
+            }
+          );
+        });
       } else {
         // ?page=blank
         loadHome(res);
