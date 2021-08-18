@@ -181,12 +181,21 @@ app.get("/", function (req, res) {
         res.clearCookie("pwd");
         res.redirect("/");
       } else if (req.query.page == "search") {
+let options={title:req.query.q, opt:req.query.opt, isref:req.query.opt=="refs",islink:(req.query.opt=="link"||req.query.opt=="")};
+        async.waterfall(
+[function getResFromDB(cb){
+
+}], function(error){
+
+        
         renderFile(
-          path.join(__dirname, "/views/search.html"),{title:req.query.q, opt:req.query.opt, isref:req.query.opt=="refs",islink:(req.query.opt=="link"||req.query.opt=="")},
+          path.join(__dirname, "/views/search.html"),options,
           (a) => {
+
+
             res.send(a);
           }
-        );
+        );})
       } else {
         // ?page=blank
         loadHome(res);
