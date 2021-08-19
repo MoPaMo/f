@@ -175,32 +175,33 @@ app.get("/", function(req, res) {
         res.clearCookie("pwd");
         res.redirect("/");
       } else if (req.query.page == "search") {
-        if(req.query.q){
-        let options = {
-          title: req.query.q,
-          opt: req.query.opt,
-          isref: req.query.opt == "refs",
-          islink: req.query.opt == "link" || req.query.opt == ""||!req.query.opt,
-        };
-        async.waterfall([function getResFromDB(cb) {
-      db.all(
-        `SELECT * FROM links WHERE token LIKE "%"||?||"%";`,
-        [req.query.q],
-        (err, rows) => {
-          if (err) console.log(err);
-          options.rows=rows;
-          cb();
-        })
+        if (req.query.q) {
+          let options = {
+            title: req.query.q,
+            opt: req.query.opt,
+            isref: req.query.opt == "refs",
+            islink: req.query.opt == "link" || req.query.opt == "" || !req.query.opt,
+          };
+          async.waterfall([function getResFromDB(cb) {
+            db.all(
+              `SELECT * FROM links WHERE token LIKE "%"||?||"%";`,
+              [req.query.q],
+              (err, rows) => {
+                if (err) console.log(err);
+                options.rows = rows;
+                cb();
+              })
 
-        }], function(error) {
-          renderFile(
-            path.join(__dirname, "/views/search.html"),
-            options,
-            (a) => {
-              res.send(a);
-            }
-          );
-        });}else{
+          }], function(error) {
+            renderFile(
+              path.join(__dirname, "/views/search.html"),
+              options,
+              (a) => {
+                res.send(a);
+              }
+            );
+          });
+        } else {
           res.sendFile(`${__dirname}/views/404.html`);
         }
       } else {
