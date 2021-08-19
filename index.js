@@ -175,6 +175,7 @@ app.get("/", function(req, res) {
         res.clearCookie("pwd");
         res.redirect("/");
       } else if (req.query.page == "search") {
+        if(req.query.q){
         let options = {
           title: req.query.q,
           opt: req.query.opt,
@@ -199,7 +200,9 @@ app.get("/", function(req, res) {
               res.send(a);
             }
           );
-        });
+        });}else{
+          res.sendFile(`${__dirname}/views/404.html`);
+        }
       } else {
         // ?page=blank
         loadHome(res);
