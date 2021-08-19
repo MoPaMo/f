@@ -418,7 +418,18 @@
               <a class="nav-link {{#isref}} actice{{/isref}}  {{#islink}} disabled{{/islink}}" href="?page=search&opt=refs&q={{title}}">Referrals</a>
             </li>
           </ul>
-
+          <table class="table table-striped">
+            {{#rows}}
+              <tr>
+                <a href="/?page=detail&token={{token}}">
+                  <td>{{id}}</td>
+                  <td>{{token}}</td>
+                  <td>{{url}}</td>
+                  <td>{{created}}</td>
+                </a>
+              </tr>
+            {{/rows}}
+          </table>
         </div>
       </div>
       <br><br><br><br><br>
