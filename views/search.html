@@ -421,12 +421,12 @@
           <table class="table table-striped">
             {{#rows}}
               <tr>
-                <a href="/?page=detail&token={{token}}">
-                  <td>{{id}}</td>
-                  <td>{{token}}</td>
-                  <td>{{url}}</td>
-                  <td>{{created}}</td>
-                </a>
+
+                <td> <a href="/?page=detail&token={{token}}" title="Open detail page {{token}}">{{id}}</a></td>
+                <td> <a href="/?page=detail&token={{token}}" title="Open detail page for {{token}}">{{token}}</a></td>
+                <td> <a href="{{url}}" title="Open '{{url}}' ">{{url}}</a></td>
+                <td>{{created}}</td>
+
               </tr>
             {{/rows}}
           </table>
