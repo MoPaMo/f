@@ -409,8 +409,9 @@
                         <label for="exampleInputPassword1" class="form-label">URL</label>
                         <input type="url" class="form-control" id="exampleInputPassword1" required name="url">
                       </div>
-                      <input type="text" name="context" value="add" class="invisible">
-                      <button type="submit" class="btn btn-primary">Add</button>
+                      <input type="text" name="context" value="add" class="invisible"><br/>
+                      <button type="submit" class="btn btn-primary" id="submitbtn">Add</button>
+                      <button type="reset" class="btn btn-secondary" >Reset</button>
                     </form>
                   </div>
                 </div>
@@ -478,8 +479,11 @@
           let dat = JSON.parse(data);
           if (dat.length) {
             $("#emailHelp").html(`This token is used already for the URL <a href="${dat[0]["url"]}">${dat[0]["url"]}</a> `);
+            $("#exampleInputPassword1,#submitbtn").attr("disabled", true)
+
           } else {
             $("#emailHelp").html("");
+            $("#exampleInputPassword1,#submitbtn").attr("disabled", false)
           }
 
         })
