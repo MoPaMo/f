@@ -42,8 +42,8 @@
   <title>404 Not Found | f: the free, open source forwarding system</title>
   <!-- Favicon -->
   <link rel="icon" href="/static/img/brand/dark.ico" sizes="any"><!-- 32×32 -->
-<link rel="icon" href="/static/img/brand/responsive.min.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/static/img/brand/fav.png"><!-- 180×180 -->
+  <link rel="icon" href="/static/img/brand/responsive.min.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/static/img/brand/fav.png"><!-- 180×180 -->
   <!-- Fonts -->
   <link rel="stylesheet" href="/static/fonts/OpenSans/opensans.css">
   <!-- Icons -->
@@ -79,6 +79,12 @@
               <a class="nav-link" href="/?page=add">
                 <i class="ni ni-fat-add text-orange"></i>
                 <span class="nav-link-text">Create New Referrer</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/?page=add">
+                <i class="ni ni-books text-orange"></i>
+                <span class="nav-link-text">Last Referrerals</span>
               </a>
             </li>
             <li class="nav-item">
@@ -362,19 +368,20 @@
   <!-- Argon JS -->
   <script src="/static/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
-  $(function(){
-let url = location.pathname.split("/")
-let parsedYet=location.hostname
-for (a in url){let slash=url[a];
-  if(slash){//not first string (always empty)
-    parsedYet+="/"+slash
-    console.log(parsedYet)
-    $("#pagination").append(`<li class="breadcrumb-item"><a href="https://${parsedYet}">${slash}</a></li>`)
-  }else{
-    continue
-  }
-}
-  })
+    $(function() {
+      let url = location.pathname.split("/")
+      let parsedYet = location.hostname
+      for (a in url) {
+        let slash = url[a];
+        if (slash) { //not first string (always empty)
+          parsedYet += "/" + slash
+          console.log(parsedYet)
+          $("#pagination").append(`<li class="breadcrumb-item"><a href="https://${parsedYet}">${slash}</a></li>`)
+        } else {
+          continue
+        }
+      }
+    })
   </script>
 </body>
 
