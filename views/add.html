@@ -469,9 +469,7 @@
     $(function() {
       $("#basic-addon3").html(location.hostname + "/")
       $("#tokenInput").on("keyup", function() {
-        if ($("#tokenInput").val().length > 10) {
-          $("#emailHelp").html("It's called a URL <em>shortner </em> <i class=\"ni ni-scissors\"></i>")
-        };
+
         $.post("/", {
           context: "checkurl",
           token: $("#tokenInput").val()
@@ -482,7 +480,9 @@
             $("#exampleInputPassword1,#submitbtn").attr("disabled", true)
 
           } else {
-            $("#emailHelp").html("");
+            if ($("#tokenInput").val().length > 10) {
+              $("#emailHelp").html("It's called a URL <em>shortner </em> <i class=\"ni ni-scissors\"></i>")
+            };
             $("#exampleInputPassword1,#submitbtn").attr("disabled", false)
           }
 
