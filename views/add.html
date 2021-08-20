@@ -470,7 +470,27 @@
       $("#tokenInput").on("keyup", function() {
         if ($("#tokenInput").val().length > 10) {
           $("#emailHelp").html("It's called a URL <em>shortner </em> <i class=\"ni ni-scissors\"></i>")
-        }
+        };
+        $.post("/", {
+          context: "checkurl",
+          token: $("#tokenInput").val()
+        }).done((data) => {
+          let dat = JSON.parse(data);
+          if (dat.length) {
+            $("#emailHelp").html(`This token is used already for the URL <a href="${dat[0]["url"]}">${dat[0]["url"]}</a> `);
+          } else {
+            $("#emailHelp").html("");
+          }
+
+        })
+        /* let token=$("#tokenInput");
+                $.post("/", {
+                  context: "checkurl",
+                  token: token,
+                }).done((data)=> {
+                  console.log(data)
+                  //$("#emailHelp").html("It's called a URL <em>shortner </em> <i class=\"ni ni-scissors\"></i>")
+                });*/
       })
       //emailHelp
     })

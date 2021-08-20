@@ -249,6 +249,24 @@ app.post("/", function(req, res) {
     } else {
       res.redirect("/");
     }
+  } else if (req.body.context == "checkurl") {
+    if (req.cookies.pwd && req.cookies.pwd === process.env.pwd) {
+      if (req.body.token) {
+        db.all(
+          `SELECT url FROM links WHERE token=?;`,
+          [req.body.token],
+          (err, rows) => {
+            if (err) console.log(err);
+
+            res.send(JSON.stringify(rows))
+          })
+
+      }else{
+        res.send("[]")
+      }
+    }else{
+      res.send("unauthorized")
+    }
   } else {
     res.redirect("/");
   }
