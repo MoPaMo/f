@@ -127,13 +127,14 @@
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
-          <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+          <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main" method="get" action="/">
             <div class="form-group mb-0">
               <div class="input-group input-group-alternative input-group-merge">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                  <button role="submit" class="input-group-text"><i class="fas fa-search"></i></button>
                 </div>
-                <input class="form-control" placeholder="Search" type="text">
+                <input class="form-control" placeholder="Search" type="text" name="q">
+                <input class="invisible" name="page" value="search">
               </div>
             </div>
             <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
