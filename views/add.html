@@ -42,8 +42,9 @@
   <title>Create New Link | f: the free, open source forwarding system</title>
   <!-- Favicon -->
   <link rel="icon" href="/static/img/brand/dark.ico" sizes="any"><!-- 32×32 -->
-<link rel="icon" href="/static/img/brand/responsive.min.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/static/img/brand/fav.png"><!-- 180×180 -->  <!-- Fonts -->
+  <link rel="icon" href="/static/img/brand/responsive.min.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/static/img/brand/fav.png"><!-- 180×180 -->
+  <!-- Fonts -->
   <link rel="stylesheet" href="/static/fonts/OpenSans/opensans.css">
   <!-- Icons -->
   <link rel="stylesheet" href="static/vendor/nucleo/css/nucleo.css" type="text/css">
@@ -79,12 +80,13 @@
                 <i class="ni ni-fat-add text-orange"></i>
                 <span class="nav-link-text">Create New Referrer</span>
               </a>
-            </li>            <li class="nav-item">
-                          <a class="nav-link" href="/?page=add">
-                            <i class="ni ni-books text-orange"></i>
-                            <span class="nav-link-text">Last Referrerals</span>
-                          </a>
-                        </li>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/?page=add">
+                <i class="ni ni-books text-orange"></i>
+                <span class="nav-link-text">Last Referrerals</span>
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="/?page=search&q=search">
                 <i class="ni ni-pin-3 text-primary"></i>
@@ -394,7 +396,7 @@
                     </div>
                   </div>
                   <div class="mt-3 mb-0 text-sm">
-                    <form role="form" action="/" method="post" >
+                    <form role="form" action="/" method="post">
                       <div class="mb-3">
                         <label for="tokenInput" class="form-label">Token</label>
                         <div class="input-group mb-3">
@@ -463,14 +465,15 @@
   <!-- Argon JS -->
   <script src="static/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
-  $(function(){
-    $("#basic-addon3").html(location.hostname+"/")
-$("#tokenInput").on("keyup",function(){
-if($("#tokenInput").val().length>10){
-  $("#emailHelp").html("It's called a URL <em>shortner </em> <i class=\"ni ni-scissors\"></i>")}
-})
-    //emailHelp
-  })
+    $(function() {
+      $("#basic-addon3").html(location.hostname + "/")
+      $("#tokenInput").on("keyup", function() {
+        if ($("#tokenInput").val().length > 10) {
+          $("#emailHelp").html("It's called a URL <em>shortner </em> <i class=\"ni ni-scissors\"></i>")
+        }
+      })
+      //emailHelp
+    })
   </script>
 </body>
 
