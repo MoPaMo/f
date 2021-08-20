@@ -286,12 +286,12 @@ app.get("/:id", function(req, res) {
       );
       res.redirect(rows[0].url);
     } else {
-      res.sendFile(path.join(__dirname, "/views/404.html"));
+      res.sendFile(path.join(__dirname, "/views/404notsignedin.html"));
     }
   });
 });
 app.use(function(req, res) {
-  res.sendFile(`${__dirname}/views/404.html`, 404);
+  res.sendFile(`${__dirname}/views/404notsignedin.html`, 404);
 });
 app.listen(port, function(err) {
   if (err) console.log(err);
