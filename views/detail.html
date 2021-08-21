@@ -567,7 +567,7 @@
             <div class="card-body">
               <br />
               Delete this Link <span class="badge bg-danger text-white">Irreversible</span>
-              <button type="button" class="btn btn-danger text-white"  id="delbtn" name="button">Delete</button>
+              <button type="button" class="btn btn-danger text-white" id="delbtn" name="button">Delete</button>
             </div>
           </div>
         </div>
@@ -619,8 +619,21 @@
   <script src="static/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
     $(function() {
-    $("#delbtn").click((click)=>{
-console.log(click)    })
+      let token = "{{token}}"
+      $("#delbtn").click((click) => {
+        $.ajax({
+          type: "POST",
+          url: "/",
+          data: {
+            context: "delete",
+            token: token
+          },
+          success: (success) => {
+            console.log(success)
+          }
+        });
+
+      })
       //emailHelp
     })
   </script>

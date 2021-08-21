@@ -249,6 +249,39 @@ app.post("/", function(req, res) {
     } else {
       res.redirect("/");
     }
+  } else if (req.body.context == "delete") {
+    if (req.cookies.pwd && req.cookies.pwd === process.env.pwd) {
+      if (req.body.token) {
+        db.all(
+          `SELECT id FROM links WHERE token=?;`,
+          [req.body.token],
+          (err, rows) => {
+            {
+              if (err) {
+                console.log(err);
+                res.send("error");
+                return;
+              }
+            }
+            if (rows.length) {
+              db.run("DELETE FROM links WHERE id=?; ", [rows[0].id], (err2, rows2) => {
+                if (err) {
+                  console.log(err2);
+                  res.send("error");
+                  return;
+                }
+                res.send("success")
+              })
+            } else {
+              res.send("Token not under use")
+            }
+          })
+      } else {
+        res.send("token missing")
+      }
+    } else {
+      res.send("unauthorized")
+    }
   } else if (req.body.context == "checkurl") {
     if (req.cookies.pwd && req.cookies.pwd === process.env.pwd) {
       if (req.body.token) {
@@ -261,10 +294,10 @@ app.post("/", function(req, res) {
             res.send(JSON.stringify(rows))
           })
 
-      }else{
+      } else {
         res.send("[]")
       }
-    }else{
+    } else {
       res.send("unauthorized")
     }
   } else {
