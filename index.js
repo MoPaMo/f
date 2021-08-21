@@ -106,47 +106,51 @@ app.get("/", function(req, res) {
             `SELECT * FROM links WHERE token=?`,
             [req.query.token],
             (err, rows) => {
-              if (err) return console.log(err); //abort if error
-              db.all(
-                `SELECT * FROM refs WHERE link_id=? ORDER BY timeHit DESC LIMIT 5;`,
-                [rows[0].id],
-                (err2, rows2) => {
-                  db.get(
-                    `SELECT COUNT(id) FROM refs WHERE link_id=?;`,
-                    [rows[0].id],
-                    (err3, rows3) => {
-                      console.log(rows3);
-                      renderFile(
-                        "views/detail.html", {
-                          basicData: rows[0],
-                          token: req.query.token,
-                          url: rows[0].url,
-                          links: rows2,
-                          count: rows3[`COUNT(id)`],
-                          convDate: function() {
-                            return new Date(this.timeHit * 1000);
+              if (rows.length) { //link exist
+                if (err) return console.log(err); //abort if error
+                db.all(
+                  `SELECT * FROM refs WHERE link_id=? ORDER BY timeHit DESC LIMIT 5;`,
+                  [rows[0].id],
+                  (err2, rows2) => {
+                    db.get(
+                      `SELECT COUNT(id) FROM refs WHERE link_id=?;`,
+                      [rows[0].id],
+                      (err3, rows3) => {
+                        console.log(rows3);
+                        renderFile(
+                          "views/detail.html", {
+                            basicData: rows[0],
+                            token: req.query.token,
+                            url: rows[0].url,
+                            links: rows2,
+                            count: rows3[`COUNT(id)`],
+                            convDate: function() {
+                              return new Date(this.timeHit * 1000);
+                            },
+                            platform: function() {
+                              switch (this.platType) {
+                                case "mobile":
+                                  return "Mobile";
+                                  break;
+                                case "desktop":
+                                  return "Desktop";
+                                  break;
+                                default:
+                                  return "Unknown";
+                              }
+                            },
                           },
-                          platform: function() {
-                            switch (this.platType) {
-                              case "mobile":
-                                return "Mobile";
-                                break;
-                              case "desktop":
-                                return "Desktop";
-                                break;
-                              default:
-                                return "Unknown";
-                            }
-                          },
-                        },
-                        function(a) {
-                          res.send(a);
-                        }
-                      );
-                    }
-                  );
-                }
-              );
+                          function(a) {
+                            res.send(a);
+                          }
+                        );
+                      }
+                    );
+                  }
+                );
+              } else { //404
+                res.sendFile(`${__dirname}/views/404.html`);
+              }
             }
           );
         } else {
