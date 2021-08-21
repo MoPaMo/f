@@ -94,7 +94,7 @@ let db = new sqlite3.Database("./db/db.db", sqlite3.OPEN_READWRITE, (err) => {
   }
   console.log("Connected to the database.");
 });
-
+// page delivery
 app.get("/", function(req, res) {
   if (req.cookies.pwd && req.cookies.pwd === process.env.pwd) {
     if (req.query.page) {
@@ -217,6 +217,7 @@ app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "/views/login.html"));
   }
 });
+// api
 app.post("/", function(req, res) {
   if (req.body.pwd && req.body.pwd == process.env.pwd) {
     res.cookie("pwd", req.body.pwd);
@@ -304,7 +305,9 @@ app.post("/", function(req, res) {
     res.redirect("/");
   }
 });
+// static file
 app.use("/static", express.static(path.join(__dirname, "/static")));
+//forwarding
 app.get("/:id", function(req, res) {
   let id = req.params.id;
   db.all(`SELECT url, id FROM links WHERE token=?`, [id], (err, rows) => {
