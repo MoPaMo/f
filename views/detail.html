@@ -604,6 +604,25 @@
       </div>
     </footer>
   </div>
+  <!-- Button trigger modal -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Successfully deleted "{{token}}"</h5>
+        </div>
+        <div class="modal-body">
+          We've successfully delted the link "{{token}}" &rarr; "{{url}}"
+        </div>
+        <div class="modal-footer">
+          <a type="button" class="btn btn-secondary" href="/?page=add">Create New Link</a>
+          <a type="button" class="btn btn-primary text-white" href="/">Return To Dashboard</a>
+        </div>
+      </div>
+    </div>
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
@@ -619,7 +638,10 @@
   <script src="static/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
     $(function() {
-      let token = "{{token}}"
+      let token = "{{token}}";
+      var deletedmodal = new bootstrap.Modal(document.getElementById('modal'), {
+        backdrop: "static"
+      })
       $("#delbtn").click((click) => {
         $.ajax({
           type: "POST",
@@ -629,6 +651,9 @@
             token: token
           },
           success: (success) => {
+            if (success == "success") { //successfully deleted referrer
+              deletedmodal.show()
+            }
             console.log(success)
           }
         });
