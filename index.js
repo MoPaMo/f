@@ -79,7 +79,6 @@ const loadHome = (res) => {
     }
   );
 };
-require("./pwd.js");
 app.use(cookieParser());
 app.use(express.json());
 app.use(

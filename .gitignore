@@ -1,7 +1,6 @@
 .env
 ./db/db.db
 .\db\db.db
-pwd.js
 .replit
 */*.db
 *\*.db
