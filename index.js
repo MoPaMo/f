@@ -157,7 +157,7 @@ app.get("/", function(req, res) {
         }
       } else if (req.query.page == "allRefs") {
         db.all(
-          `SELECT * FROM refs ORDER BY timeHit DESC LIMIT 250;`,
+          `SELECT * FROM refs LEFT JOIN links ON refs.link_id = links.id ORDER BY timeHit DESC LIMIT 250;`,
           [],
           (err, rows) => {
             if (err) console.log(err);
