@@ -273,8 +273,15 @@ app.post("/", function(req, res) {
                   console.log(err2);
                   res.send("error");
                   return;
-                }
-                res.send("success")
+                };
+                db.run("DELETE FROM refs WHERE link_id=?; ", [rows[0].id], (err2, rows2) => {
+                  if (err) {
+                    console.log(err2);
+                    res.send("error");
+                    return;
+                  }
+                  res.send("success")
+                });
               })
             } else {
               res.send("Token not under use")
