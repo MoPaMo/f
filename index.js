@@ -44,7 +44,7 @@ const loadHome = (res) => {
         if (params.missingInfo) {
           db.all("SELECT COUNT (id) FROM refs;", (err, rows) => {
             if (err) console.log(err);
-            if (rows[0][`COUNT (id)`];) {
+            if (rows[0][`COUNT (id)`]) {
               params.total_refs = rows[0][`COUNT (id)`];
               params.per_link = (params.total_refs / params.links).toFixed(2);
 
