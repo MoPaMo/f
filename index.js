@@ -271,7 +271,7 @@ app.post("/", function(req, res) {
           ],
           function(err) {
             if (err) {
-              res.redirect("/");
+              res.redirect("/?page=detail&token=" + encodeURIComponent(req.body.token));
 
               return console.log(err.message);
             }
