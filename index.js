@@ -271,13 +271,13 @@ app.post("/", function(req, res) {
           ],
           function(err) {
             if (err) {
-              res.redirect("/?page=detail&token=" + encodeURIComponent(req.body.token));
+              res.redirect("/");
 
               return console.log(err.message);
             }
             // get the last insert id
             console.log(`A row has been inserted with rowid ${this.lastID}`);
-            res.redirect("/");
+            res.redirect("/?page=detail&token=" + encodeURIComponent(req.body.token));
             return;
           }
         );
