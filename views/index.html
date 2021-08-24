@@ -81,7 +81,7 @@
                 <i class="ni ni-fat-add text-orange"></i>
                 <span class="nav-link-text">Create New Referrer</span>
               </a>
-            </li>{{#missingInfo}}
+            </li>{{#ok}}
               <li class="nav-item">
                 <a class="nav-link" href="/?page=allRefs">
                   <i class="ni ni-books text-orange"></i>
@@ -94,7 +94,7 @@
                   <span class="nav-link-text">Search</span>
                 </a>
               </li>
-            {{/missingInfo}}
+            {{/ok}}
           </ul>
           <!-- Divider -->
           <hr class="my-3">
@@ -361,7 +361,7 @@
       </div>
     </nav>
     <!-- Header -->
-    <!-- Header -->{{#missingInfo}}
+    <!-- Header -->{{#ok}}
       <div class="header bg-primary pb-6">
         <div class="container-fluid">
           <div class="header-body">
@@ -475,10 +475,10 @@
           </div>
         </div>
       </div>
-    {{/missingInfo}}
+    {{/ok}}
     <!-- Page content -->
     <div class="container-fluid mt--6">
-      {{#missingInfo}}
+      {{#ok}}
         <div class="row">
           <div class="col-xl-8">
             <div class="card bg-default">
@@ -683,8 +683,8 @@
             </div>
           </div>
         </div>
-      {{/missingInfo}}
-      {{#ok}}
+      {{/ok}}
+      {{#missingInfo}}
       <br><br><br><br><br><br>
         <div class="row">
           <div class="alert alert-danger" role="alert">
@@ -694,7 +694,7 @@
             <p class="mb-0">You can create a new link <a href="/?page=add">here</a></p>
           </div>
         </div>
-      {{/ok}}
+      {{/missingInfo}}
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">

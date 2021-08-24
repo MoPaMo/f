@@ -29,19 +29,21 @@ const loadHome = (res) => {
   async.waterfall(
     [
       function linkCount(cb) {
-        db.all("SELECT COUNT (id) FROM links; ", (err, rows) => {
+        db.all("SELECT COUNT (id) FROM links;", (err, rows) => {
           if (err) console.log(err);
-          if (rows[0][`COUNT (id)`]) {
+          console.log(rows);
+          if (rows[0][`COUNT (id)`]>0) {
+            params.links = rows[0][`COUNT (id)`];
+            console.log(rows[0][`COUNT (id)`], "Bigger than 0")
+            cb();
+          } else {
             params.missingInfo = true;
             cb()
-          } else {
-            params.links = rows[0][`COUNT (id)`];
-            cb();
           }
         });
       },
       function refCount(cb) {
-        if (params.missingInfo) {
+        if (!params.missingInfo) {
           db.all("SELECT COUNT (id) FROM refs;", (err, rows) => {
             if (err) console.log(err);
             if (rows[0][`COUNT (id)`]) {
@@ -59,7 +61,7 @@ const loadHome = (res) => {
         }
       },
       function osCount(cb) {
-        if (params.missingInfo) {
+        if (!params.missingInfo) {
 
           db.all(
             'SELECT os_name||" "||versionName, COUNT(*) as a FROM refs GROUP BY os_name||" "||versionName ORDER BY a DESC;',
@@ -74,7 +76,7 @@ const loadHome = (res) => {
         }
       },
       function platType(cb) {
-        if (params.missingInfo) {
+        if (!params.missingInfo) {
 
           db.all(
             "SELECT platType, COUNT(*) as a FROM refs GROUP BY platType ORDER BY a DESC;",
