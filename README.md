@@ -37,8 +37,16 @@ npm install
 ```
 echo "pwd=[your password]" > .env
 ```
+5. Create the database file in ./db/
+```cmd
+sqlite3 db/db.db
+```
 
-5. Run it!
+Copy and paste [these](https://github.com/MoPaMo/f#sql-commands) SQL commands
+
+For the lazy: You can also just copy `example.db` into `./db/` and rename it to `db.db`
+
+6. Run it!
  ```cmd
  npm start # or node index.js
  ```
@@ -46,9 +54,8 @@ echo "pwd=[your password]" > .env
 ## Details
 ### DB structure
 
-##### SQL CMDs:
+##### SQL Comands:
 ```sql
-CREATE DATABASE f;
 
 CREATE TABLE links (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL , token TEXT NOT NULL UNIQUE, url TEXT NOT NULL, created INTEGER);
 
