@@ -126,14 +126,20 @@ var dberror = false;
 let db = new sqlite3.Database("./db/db.db", sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
     console.error(err.message);
-    dberror = true;
+    dberror = err.message;
   }
   console.log("Connected to the database.");
 });
 // page delivery
 app.all("/", (req, res, next) => {
   if (dberror) {
-    res.sendFile(`${__dirname}/views/dberror.html`);
+    let signedin = (req.cookies.pwd && req.cookies.pwd === process.env.pwd);
+    renderFile(`${__dirname}/views/dberror.html`, {
+      signedin: signedin,
+      error: (signedin ? dberror : "")
+    }, (data) => {
+      res.send(data);
+    });
   } else {
     next();
   }

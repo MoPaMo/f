@@ -127,7 +127,9 @@
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
               <h1 class="text-white">Have you seen a database lately?</h1>
-              <h2 class="text-white">500: An error occured while connecting to the databse!</h2>
+              <img src="/static/img/illustrations/dberror.svg" class="img-fluid mt-3 mb-3" alt="...">
+              <h2 class="text-white">500: An error occured while connecting to the database!</h2>
+              {{#signedin}}<h6>{{error}}</h6>{{/signedin}}
               <br><br>
               <h3 class="text-white">So what is this?</h3>
               <p class="text-lead text-white">f is a self hosted, open source link shortening programm. You can make it your own with the button below!</p>
