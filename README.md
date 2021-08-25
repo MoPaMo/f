@@ -31,9 +31,12 @@ git clone https://github.com/MoPaMo/f.git
 
 ```cmd
 npm install
+```
+
 4. Add a .env and choose a password
 ```
 echo "pwd=[your password]" > .env
+```
 
 5. Run it!
  ```cmd
