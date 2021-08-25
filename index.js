@@ -32,7 +32,7 @@ const loadHome = (res) => {
         db.all("SELECT COUNT (id) FROM links;", (err, rows) => {
           if (err) console.log(err);
           console.log(rows);
-          if (rows[0][`COUNT (id)`]>0) {
+          if (rows[0][`COUNT (id)`] > 0) {
             params.links = rows[0][`COUNT (id)`];
             console.log(rows[0][`COUNT (id)`], "Bigger than 0")
             cb();
@@ -123,13 +123,22 @@ app.use(
   })
 );
 // open the database
+var dberror = false;
 let db = new sqlite3.Database("./db/db.db", sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
     console.error(err.message);
+    dberror = true;
   }
   console.log("Connected to the database.");
 });
 // page delivery
+app.all("/", (req, res, next) => {
+  if (dberror) {
+    res.send("console.error();")
+  } else {
+    next();
+  }
+})
 app.get("/", function(req, res) {
   if (req.cookies.pwd && req.cookies.pwd === process.env.pwd) {
     if (req.query.page) {
