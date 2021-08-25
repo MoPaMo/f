@@ -15,6 +15,32 @@
 <!---
 
 f works just with sqlite3 and nodeJS - simple but genius! It's so small you can also use it on micro hosting services like [Glitch](glitch.com) or [ReplIt](https://replit.com/github/MoPaMo/f)--->
+
+## Installing
+### Default installing
+
+1. Clone the git repo:
+```cmd 
+git clone https://github.com/MoPaMo/f.git
+```
+2. Enter the new directory:
+ ```cmd
+ cd f
+ ```
+3. Install the node modules:
+
+```cmd
+npm install
+4. Add a .env and choose a password
+```
+echo "pwd=[your password]" > .env
+
+5. Run it!
+ ```cmd
+ npm start # or node index.js
+ ```
+
+## Details
 ### DB structure
 
 ##### SQL CMDs:
