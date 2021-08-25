@@ -31,7 +31,6 @@ const loadHome = (res) => {
       function linkCount(cb) {
         db.all("SELECT COUNT (id) FROM links;", (err, rows) => {
           if (err) console.log(err);
-          console.log(rows);
           if (rows[0][`COUNT (id)`] > 0) {
             params.links = rows[0][`COUNT (id)`];
             //console.log(rows[0][`COUNT (id)`], "Bigger than 0")
