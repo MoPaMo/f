@@ -1,16 +1,16 @@
 ![f logo](https://github.com/MoPaMo/f/blob/12bacf3ee55fc1e734acd4545aac92975022a81b/static/img/brand/banner.png?raw=true)
 
-⚡️ Powerful **Analytics**
+:zap:  Powerful **Analytics**
 
-🎛 **User-friendly** modern browser interface
+:control_knobs:  **User-friendly** modern browser interface
 
-💾 > 20 MB 
+:floppy_disk:  > 20 MB 
 
-🌐 Works even on **microhosting services**!
+:globe_with_meridians:  Works even on **microhosting services**!
 
-🏗 Build with sqlite3 and nodeJS
+:building_construction:  Build with sqlite3 and nodeJS
 
-🏃 Developed with **speed** in mind 
+:runner:  Developed with **speed** in mind 
 
 <!---
 
