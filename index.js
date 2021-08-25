@@ -91,6 +91,22 @@ const loadHome = (res) => {
           cb();
         }
       },
+      function popLink(cb) {
+              if (!params.missingInfo) {
+
+                db.all(
+                  "SELECT token, COUNT(*) as a FROM refs LEFT JOIN links ON refs.link_id=links.id GROUP BY platType ORDER BY a DESC;",
+                  (err, rows) => {
+                    if (err) console.log(err);
+                    //console.log(rows);
+                    params.popLink = rows[0];
+                    cb();
+                  }
+                );
+              } else {
+                cb();
+              }
+            },
       function addfract(cb) {
         if (!params.missingInfo) {
 
