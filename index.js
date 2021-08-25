@@ -191,6 +191,26 @@ app.get("/", function(req, res) {
         } else {
           res.sendFile(path.join(__dirname, "/views/404.html"));
         }
+      } else if (req.query.page == "allLinks") {
+        db.all(
+          `SELECT * FROM links ORDER BY created DESC LIMIT 250;`,
+          [],
+          (err, rows) => {
+            if (err) console.log(err);
+            console.log(rows)
+            renderFile(
+              path.join(__dirname, "/views/alllinks.html"), {
+                links: rows,
+                convDate: function() {
+                  return new Date(this.created * 1000);
+                },
+              },
+              (a) => {
+                res.send(a);
+              }
+            );
+          }
+        );
       } else if (req.query.page == "allRefs") {
         db.all(
           `SELECT * FROM refs LEFT JOIN links ON refs.link_id = links.id ORDER BY timeHit DESC LIMIT 250;`,
