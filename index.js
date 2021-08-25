@@ -34,7 +34,7 @@ const loadHome = (res) => {
           console.log(rows);
           if (rows[0][`COUNT (id)`] > 0) {
             params.links = rows[0][`COUNT (id)`];
-            console.log(rows[0][`COUNT (id)`], "Bigger than 0")
+            //console.log(rows[0][`COUNT (id)`], "Bigger than 0")
             cb();
           } else {
             params.missingInfo = true;
@@ -82,7 +82,7 @@ const loadHome = (res) => {
             "SELECT platType, COUNT(*) as a FROM refs GROUP BY platType ORDER BY a DESC;",
             (err, rows) => {
               if (err) console.log(err);
-              console.log(rows);
+              //console.log(rows);
               params.mostUsedPlat = rows[0].platType;
               params.mostPlatFract = rows[0].a;
               cb();
@@ -160,7 +160,7 @@ app.get("/", function(req, res) {
                       `SELECT COUNT(id) FROM refs WHERE link_id=?;`,
                       [rows[0].id],
                       (err3, rows3) => {
-                        console.log(rows3);
+                        //console.log(rows3);
                         renderFile(
                           "views/detail.html", {
                             basicData: rows[0],
@@ -206,7 +206,7 @@ app.get("/", function(req, res) {
           [],
           (err, rows) => {
             if (err) console.log(err);
-            console.log(rows)
+            //console.log(rows)
             renderFile(
               path.join(__dirname, "/views/alllinks.html"), {
                 links: rows,
@@ -389,7 +389,7 @@ app.get("/:id", function(req, res) {
     //console.log(JSON.stringify(rows));
     if (rows.length && rows[0].url) {
       let Browser = bowser.parse(req.headers["user-agent"]);
-      console.log(Browser);
+      //console.log(Browser);
       db.run(
         `INSERT INTO refs (link_id, lang, browser_name, os_name, versionName, platType, referrer, full_ua, timeHit) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
@@ -409,7 +409,7 @@ app.get("/:id", function(req, res) {
             return console.log(err.message);
           }
           // get the last insert id
-          console.log(`A row has been inserted with rowid ${this.lastID}`);
+          //console.log(`A row has been inserted with rowid ${this.lastID}`);
           return;
         }
       );
