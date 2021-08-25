@@ -92,7 +92,7 @@ const loadHome = (res) => {
         }
       },
       function addfract(cb) {
-        if (params.missingInfo) {
+        if (!params.missingInfo) {
 
           params.fract = function() {
             return ((this.a / params.total_refs) * 100).toFixed(2);
