@@ -42,7 +42,7 @@ echo "pwd=[your password]" > .env
 sqlite3 db/db.db
 ```
 
-Copy and paste [these](https://github.com/MoPaMo/f#sql-commands) SQL commands
+Copy and paste [these](#sql-comands) SQL commands
 
 For the lazy: You can also just copy `example.db` into `./db/` and rename it to `db.db`
 
