@@ -1,7 +1,15 @@
 ![f logo](https://github.com/MoPaMo/f/blob/12bacf3ee55fc1e734acd4545aac92975022a81b/static/img/brand/banner.png?raw=true)
 
+⚡️ Powerful **Analytics**
+🎛 **User-friendly** modern browser interface
+💾 > 20 MB 
+🌐 Works even on **microhosting services**!
+🏗 Build with sqlite3 and nodeJS
+🏃 Developed with **speed** in mind 
 
-f works just with sqlite3 and nodeJS - simple but genius! It's so small you can also use it on micro hosting services like [Glitch](glitch.com) or [ReplIt](https://replit.com/github/MoPaMo/f)
+<!---
+
+f works just with sqlite3 and nodeJS - simple but genius! It's so small you can also use it on micro hosting services like [Glitch](glitch.com) or [ReplIt](https://replit.com/github/MoPaMo/f)--->
 ### DB structure
 
 ##### SQL CMDs:
