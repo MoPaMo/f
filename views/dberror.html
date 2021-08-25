@@ -1,0 +1,200 @@
+<!--
+=========================================================
+* Argon Dashboard - v1.2.0
+=========================================================
+* Product Page: https://www.creative-tim.com/product/argon-dashboard
+
+* Copyright  Creative Tim (http://www.creative-tim.com)
+* Coded by www.creative-tim.com
+=========================================================
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Search Engine -->
+  <meta name="description" content="f is a free, open source, self hosted forwarding system using NodeJS and sqlite3.">
+  <meta name="image" content="/static/img/brand/fav.png">
+  <!-- Schema.org for Google -->
+  <meta itemprop="name" content="f: the free, open source forwarding system">
+  <meta itemprop="description" content="f is a free, open source, self hosted forwarding system using NodeJS and sqlite3.">
+  <meta itemprop="image" content="/static/img/brand/fav.png">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="f: the free, open source forwarding system">
+  <meta name="twitter:description" content="f is a free, open source, self hosted forwarding system using NodeJS and sqlite3.">
+  <meta name="twitter:image:src" content="/static/img/brand/banner.png">
+  <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+  <meta name="og:title" content="f: the free, open source forwarding system">
+  <meta name="og:description" content="f is a free, open source, self hosted forwarding system using NodeJS and sqlite3.">
+  <meta name="og:image" content="/static/img/brand/banner.png">
+  <meta name="og:site_name" content="f: the free, open source forwarding system">
+  <meta name="og:locale" content="en_US">
+  <meta name="og:type" content="website">
+  <meta name="author" content="MoPaMo">
+  <title>500: DataBase Error | f: the free, open source forwarding system</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/static/img/brand/dark.ico" sizes="any"><!-- 32×32 -->
+  <link rel="icon" href="/static/img/brand/responsive.min.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/static/img/brand/fav.png"><!-- 180×180 -->
+  <!-- Fonts -->
+  <link rel="stylesheet" href="/static/fonts/OpenSans/opensans.css">
+  <!-- Icons -->
+  <link rel="stylesheet" href="/static/vendor/nucleo/css/nucleo.css" type="text/css">
+  <link rel="stylesheet" href="/static/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="/static/css/argon.css?v=1.2.0" type="text/css">
+</head>
+
+<body class="bg-default">
+  <!-- Navbar -->
+  <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="/static/img/brand/light.min.svg" alt="f Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="/l">
+                <img src="/static/img/brand/dark.min.svg" alt="f Logo">
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="/" class="nav-link">
+              <span class="nav-link-inner--text">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://github.com/MoPaMo/f" class=" nav-link">
+              <span class="nav-link-inner--text">Docs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://github.com/MoPaMo/f" class="nav-link">
+              <span class="nav-link-inner--text">Host It Yourself</span>
+            </a>
+          </li>
+        </ul>
+        <hr class="d-lg-none" />
+        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="https://github.com/MoPaMo" target="_blank" data-toggle="tooltip" data-original-title="Star us on Github">
+              <i class="fab fa-github"></i>
+              <span class="nav-link-inner--text d-lg-none">Github</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="https://be.co/MoPaMo" target="_blank" data-toggle="tooltip" data-original-title="Follow us on Béhance">
+              <i class="fab fa-behance"></i>
+              <span class="nav-link-inner--text d-lg-none">Béhance</span>
+            </a>
+          </li>
+          <!--li class="nav-item d-none d-lg-block ml-lg-4">
+            <a href="https://www.creative-tim.com/product/argon-dashboard-pro?ref=ad_upgrade_pro" target="_blank" class="btn btn-neutral btn-icon">
+              <span class="btn-inner--icon">
+                <i class="fas fa-shopping-cart mr-2"></i>
+              </span>
+              <span class="nav-link-inner--text">Upgrade to PRO</span>
+            </a>
+          </li-->
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
+      <div class="container">
+        <div class="header-body text-center mb-7">
+          <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+              <h1 class="text-white">Have you seen a database lately?</h1>
+              <h2 class="text-white">500: An error occured while connecting to the databse!</h2>
+              <br><br>
+              <h3 class="text-white">So what is this?</h3>
+              <p class="text-lead text-white">f is a self hosted, open source link shortening programm. You can make it your own with the button below!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+          <div class="card bg-secondary border-0 mb-0">
+            <div class="card-header bg-transparent pb-5">
+              <div class="text-muted text-center mt-2 mb-3"><small>Self Host</small></div>
+              <div class="btn-wrapper text-center">
+                <a href="https://github.com/MoPaMo/f" class="btn btn-neutral btn-icon">
+                  <span class="btn-inner--icon"><img src="/static/img/icons/github.svg"></span>
+                  <span class="btn-inner--text">Github</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="py-5" id="footer-main">
+    <div class="container">
+      <div class="row align-items-center justify-content-xl-between">
+        <div class="col-xl-6">
+          <div class="copyright text-center text-xl-left text-muted">
+            &copy; 2021 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">MoPaMo</a>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+            <li class="nav-item">
+              <a href="https://mpm.is-a.dev" class="nav-link" target="_blank">MoPaMo</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://github.com/MoPaMo/f/README.md" class="nav-link" target="_blank">Self Host</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://github.com/MoPaMo/f/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="/static/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/vendor/js-cookie/js.cookie.js"></script>
+  <script src="/static/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="/static/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Argon JS -->
+  <script src="/static/js/argon.js?v=1.2.0"></script>
+</body>
+
+</html>

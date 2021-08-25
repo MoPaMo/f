@@ -133,7 +133,7 @@ let db = new sqlite3.Database("./db/db.db", sqlite3.OPEN_READWRITE, (err) => {
 // page delivery
 app.all("/", (req, res, next) => {
   if (dberror) {
-    res.send("console.error();")
+    res.sendFile(`${__dirname}/views/dberror.html`);
   } else {
     next();
   }
