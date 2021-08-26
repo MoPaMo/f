@@ -469,48 +469,6 @@ var Charts = (function() {
 // Icon code copy/paste
 //
 
-'use strict';
-
-var CopyIcon = (function() {
-
-	// Variables
-
-	var $element = '.btn-icon-clipboard',
-		$btn = $($element);
-
-
-	// Methods
-
-	function init($this) {
-		$this.tooltip().on('mouseleave', function() {
-			// Explicitly hide tooltip, since after clicking it remains
-			// focused (as it's a button), so tooltip would otherwise
-			// remain visible until focus is moved away
-			$this.tooltip('hide');
-		});
-
-		var clipboard = new ClipboardJS($element);
-
-		clipboard.on('success', function(e) {
-			$(e.trigger)
-				.attr('title', 'Copied!')
-				.tooltip('_fixTitle')
-				.tooltip('show')
-				.attr('title', 'Copy to clipboard')
-				.tooltip('_fixTitle')
-
-			e.clearSelection()
-		});
-	}
-
-
-	// Events
-	if ($btn.length) {
-		init($btn);
-	}
-
-})();
-
 //
 // Navbar
 //
@@ -614,7 +572,7 @@ var NavbarCollapse = (function() {
 				 $('body').removeClass('nav-open');
 					navbar_menu_visible = 0;
 					$('.bodyClick').remove();
-					
+
 			 });
 
 		 $('body').addClass('nav-open');
@@ -770,55 +728,6 @@ var FormControl = (function() {
 })();
 
 //
-// Google maps
-//
-
-var $map = $('#map-default'),
-    map,
-    lat,
-    lng,
-    color = "#5e72e4";
-
-function initMap() {
-
-    map = document.getElementById('map-default');
-    lat = map.getAttribute('data-lat');
-    lng = map.getAttribute('data-lng');
-
-    var myLatlng = new google.maps.LatLng(lat, lng);
-    var mapOptions = {
-        zoom: 12,
-        scrollwheel: false,
-        center: myLatlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-    }
-
-    map = new google.maps.Map(map, mapOptions);
-
-    var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        animation: google.maps.Animation.DROP,
-        title: 'Hello World!'
-    });
-
-    var contentString = '<div class="info-window-content"><h2>Argon Dashboard</h2>' +
-        '<p>A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</p></div>';
-
-    var infowindow = new google.maps.InfoWindow({
-        content: contentString
-    });
-
-    google.maps.event.addListener(marker, 'click', function() {
-        infowindow.open(map, marker);
-    });
-}
-
-if($map.length) {
-    google.maps.event.addDomListener(window, 'load', initMap);
-}
-
-//
 // Bars chart
 //
 
@@ -940,124 +849,8 @@ var SalesChart = (function() {
 })();
 
 //
-// Bootstrap Datepicker
-//
-
-'use strict';
-
-var Datepicker = (function() {
-
-	// Variables
-
-	var $datepicker = $('.datepicker');
-
-
-	// Methods
-
-	function init($this) {
-		var options = {
-			disableTouchKeyboard: true,
-			autoclose: false
-		};
-
-		$this.datepicker(options);
-	}
-
-
-	// Events
-
-	if ($datepicker.length) {
-		$datepicker.each(function() {
-			init($(this));
-		});
-	}
-
-})();
-
-//
 // Form control
 //
-
-'use strict';
-
-var noUiSlider = (function() {
-
-	// Variables
-
-	// var $sliderContainer = $('.input-slider-container'),
-	// 		$slider = $('.input-slider'),
-	// 		$sliderId = $slider.attr('id'),
-	// 		$sliderMinValue = $slider.data('range-value-min');
-	// 		$sliderMaxValue = $slider.data('range-value-max');;
-
-
-	// // Methods
-	//
-	// function init($this) {
-	// 	$this.on('focus blur', function(e) {
-  //       $this.parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
-  //   }).trigger('blur');
-	// }
-	//
-	//
-	// // Events
-	//
-	// if ($input.length) {
-	// 	init($input);
-	// }
-
-
-
-	if ($(".input-slider-container")[0]) {
-			$('.input-slider-container').each(function() {
-
-					var slider = $(this).find('.input-slider');
-					var sliderId = slider.attr('id');
-					var minValue = slider.data('range-value-min');
-					var maxValue = slider.data('range-value-max');
-
-					var sliderValue = $(this).find('.range-slider-value');
-					var sliderValueId = sliderValue.attr('id');
-					var startValue = sliderValue.data('range-value-low');
-
-					var c = document.getElementById(sliderId),
-							d = document.getElementById(sliderValueId);
-
-					noUiSlider.create(c, {
-							start: [parseInt(startValue)],
-							connect: [true, false],
-							//step: 1000,
-							range: {
-									'min': [parseInt(minValue)],
-									'max': [parseInt(maxValue)]
-							}
-					});
-
-					c.noUiSlider.on('update', function(a, b) {
-							d.textContent = a[b];
-					});
-			})
-	}
-
-	if ($("#input-slider-range")[0]) {
-			var c = document.getElementById("input-slider-range"),
-					d = document.getElementById("input-slider-range-value-low"),
-					e = document.getElementById("input-slider-range-value-high"),
-					f = [d, e];
-
-			noUiSlider.create(c, {
-					start: [parseInt(d.getAttribute('data-range-value-low')), parseInt(e.getAttribute('data-range-value-high'))],
-					connect: !0,
-					range: {
-							min: parseInt(c.getAttribute('data-range-value-min')),
-							max: parseInt(c.getAttribute('data-range-value-max'))
-					}
-			}), c.noUiSlider.on("update", function(a, b) {
-					f[b].textContent = a[b]
-			})
-	}
-
-})();
 
 //
 // Scrollbar
