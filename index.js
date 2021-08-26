@@ -123,6 +123,20 @@ const loadHome = (res) => {
           cb();
         }
       },
+      function lastRefs(cb) {
+        if (!params.missingInfo) {
+          db.all(
+            `SELECT * FROM refs LEFT JOIN links ON refs.link_id = links.id ORDER BY timeHit DESC LIMIT 5;`,
+            [],
+            (err, rows) => {
+              if(err) console.error(err);
+              params.lastRefs = rows;
+              cb()
+            })
+        } else {
+          cb()
+        }
+      },
       function addfract(cb) {
         if (!params.missingInfo) {
 
