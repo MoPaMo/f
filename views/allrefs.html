@@ -398,6 +398,7 @@
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
+                        <th scope="col">token</th>
                         <th scope="col">OS</th>
                         <th scope="col">Browser</th>
                         <th scope="col">Plattform Type</th>
@@ -410,11 +411,12 @@
                       {{#links}}
                         <tr>
                           <th scope="row">
+                            <a href="/?page=detail&token={{token}}">
+                            {{token}}</a>
+                          </th>
+                          <td scope="row">
                             {{os_name}} {{versionName}}
-                          </th>
-                          <th scope="row">
-                            {{token}} to {{link}}
-                          </th>
+                          </td>
                           <td>
                             {{browser_name}}
                           </td>
