@@ -565,21 +565,21 @@
                     </tr>
                   </thead>
                   <tbody>{{#lastRefs}}
-                    <tr>
-                      <th scope="row">
-                        <a href="/?page=detail&token={{token}}">{{token}}</a>
-                      </th>
-                      <td>
-                        {{browser_name}} on {{os_name}} {{versionName}}
-                      </td>
-                      <td>
-                        {{lang}}
-                      </td>
-                      <td>
-                        {{referrer}}
-                      </td>
-                    </tr>
-{{/lastRefs}}
+                      <tr>
+                        <th scope="row">
+                          <a href="/?page=detail&token={{token}}">{{token}}</a>
+                        </th>
+                        <td>
+                          {{browser_name}} on {{os_name}} {{versionName}}
+                        </td>
+                        <td>
+                          {{lang}}
+                        </td>
+                        <td>
+                          {{referrer}}
+                        </td>
+                      </tr>
+                    {{/lastRefs}}
                   </tbody>
                 </table>
               </div>
@@ -638,13 +638,30 @@
       {{#missingInfo}}
         <br><br><br><br><br><br>
         <div class="row">
-          <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">Oops!</h4>
-            <p>You haven't got any referers nor referrals yet!</p>
-            <hr>
-            <p class="mb-0">You can create a new link <a href="/?page=add">here</a></p>
+          <div class="col-xl-8">
+            <div class="card">
+              <div class="card-header border-0">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <h3 class="mb-0">Let's get started!</h3>
+                  </div>
+                  <div class="col text-right">
+                    <a href="/?page=add" class="btn btn-sm btn-primary">Add</a>
+                  </div>
+                </div>
+
+                <div class="row ">
+                  <img src="/static/img/illustrations/launch.svg" class="img-fluid" alt="Rocket launch">
+                </div><br>
+                <div class="row">
+                  <h4>You haven't got any links or referrals yet</h4>
+                </div>
+                <div class="row text-center align-items-center"><a href="/?page=add" type="button" class="btn btn-primary" name="button">Create new link</a></div>
+              </div>
+            </div>
           </div>
         </div>
+
       {{/missingInfo}}
       <!-- Footer -->
       <footer class="footer pt-0">
