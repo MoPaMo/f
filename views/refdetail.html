@@ -410,22 +410,52 @@
               <!-- Projects table -->
               <table class="table align-items-center table-flush">
 
-                <tbody>{{#ua}}
-                    <tr>
-                      <th scope="row">
-                        <a href="/?page=detail&token={{token}}">{{token}}</a>
-                      </th>
-                      <td>
-                        {{.}} on {{os_name}} {{versionName}}
-                      </td>
-                      <td>
-                        {{lang}}
-                      </td>
-                      <td>
-                        {{referrer}}
-                      </td>
-                    </tr>
-                  {{/ua}}
+                <tbody>
+                  <tr>
+                    <td>
+                      Browser
+                    </td>
+                    <td>
+                      {{ua.browser.name}} {{ua.browser.version}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Operating System
+                    </td>
+                    <td>
+                      {{ua.os.name}} {{ua.os.versionName}} ({{ua.os.version}})
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Model
+                    </td>
+                    <td>
+                      {{ua.platform.model}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Vendor</td>
+                    <td> {{ua.platform.vendor}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Platform
+                    </td>
+                    <td>
+                      {{ua.platform.type}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Engine
+                    </td>
+                    <td>
+                      {{ua.engine.name}} {{ua.engine.version}}
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
