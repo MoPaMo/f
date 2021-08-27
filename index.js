@@ -9,6 +9,9 @@ const sqlite3 = require("sqlite3").verbose();
 const cookieParser = require("cookie-parser");
 const bowser = require("bowser");
 const async = require("async");
+const dayjs = require('dayjs');
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 const renderFile = function(path, data, cb) {
   fs.readFile(path, (err, buff) => {
     // if any error
@@ -129,7 +132,7 @@ const loadHome = (res) => {
             `SELECT * FROM refs LEFT JOIN links ON refs.link_id = links.id ORDER BY timeHit DESC LIMIT 5;`,
             [],
             (err, rows) => {
-              if(err) console.error(err);
+              if (err) console.error(err);
               params.lastRefs = rows;
               cb()
             })
@@ -195,6 +198,28 @@ app.get("/", function(req, res) {
     if (req.query.page) {
       if (req.query.page == "add") {
         res.sendFile(path.join(__dirname, "/views/add.html"));
+      } else if (req.query.page == "ref") {
+        if (req.query.id) {
+          db.all(
+            `SELECT * FROM refs LEFT JOIN links ON refs.link_id = links.id WHERE refs.id=?;`,
+            [req.query.id],
+            (err, rows) => {
+              if (rows.length) { //refs exist
+                if (err) return console.log(err); //abort if error
+                let data1 = rows[0];
+                data1.ua = bowser.parse(data1.full_ua);
+                data1.timeHit=dayjs.unix(data1.timeHit).toNow(true)
+                renderFile(`${__dirname}/views/refdetail.html`, data1, (data) => {
+                  res.send(data)
+                })
+              } else { //404
+                res.sendFile(`${__dirname}/views/404.html`);
+              }
+            }
+          );
+        } else {
+          res.sendFile(path.join(__dirname, "/views/404.html"));
+        }
       } else if (req.query.page == "detail") {
         if (req.query.token) {
           db.all(
