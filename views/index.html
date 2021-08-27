@@ -558,6 +558,7 @@
                 <table class="table align-items-center table-flush">
                   <thead class="thead-light">
                     <tr>
+                      <th></th>
                       <th scope="col">Token</th>
                       <th scope="col">Using</th>
                       <th scope="col">Language String</th>
@@ -566,17 +567,18 @@
                   </thead>
                   <tbody>{{#lastRefs}}
                       <tr>
+                        <th>  <a href="/?page=ref&id={{id}}">More Info</a></th>
                         <th scope="row">
-                          <a href="/?page=detail&token={{token}}">{{token}}</a>
+                          <a href="/?page=detail&id={{token}}">{{token}}</a>
                         </th>
                         <td>
-                          {{browser_name}} on {{os_name}} {{versionName}}
+                          <a href="/?page=ref&id={{id}}">{{browser_name}} on {{os_name}} {{versionName}}</a>
                         </td>
                         <td>
-                          {{lang}}
+                          <a href="/?page=ref&id={{id}}">{{lang}}</a>
                         </td>
                         <td>
-                          {{referrer}}
+                          <a href="/?page=ref&id={{id}}">{{referrer}}</a>
                         </td>
                       </tr>
                     {{/lastRefs}}

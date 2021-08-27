@@ -129,7 +129,7 @@ const loadHome = (res) => {
       function lastRefs(cb) {
         if (!params.missingInfo) {
           db.all(
-            `SELECT * FROM refs LEFT JOIN links ON refs.link_id = links.id ORDER BY timeHit DESC LIMIT 5;`,
+            `SELECT * FROM links LEFT JOIN  refs ON refs.link_id = links.id ORDER BY timeHit DESC LIMIT 5;`,
             [],
             (err, rows) => {
               if (err) console.error(err);
@@ -204,6 +204,7 @@ app.get("/", function(req, res) {
             `SELECT * FROM refs LEFT JOIN links ON refs.link_id = links.id WHERE refs.id=?;`,
             [req.query.id],
             (err, rows) => {
+              console.log(rows);
               if (rows.length) { //refs exist
                 if (err) return console.log(err); //abort if error
                 let data1 = rows[0];
