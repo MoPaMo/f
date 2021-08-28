@@ -316,7 +316,7 @@ app.get("/", function(req, res) {
               path.join(__dirname, "/views/allrefs.html"), {
                 links: rows,
                 convDate: function() {
-                  return new Date(this.timeHit * 1000);
+                  return dayjs.unix(this.timeHit).toNow(true);
                 },
               },
               (a) => {
