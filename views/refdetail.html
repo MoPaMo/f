@@ -505,6 +505,54 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-xl-8">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Raw data</h3>
+                </div>
+                <div class="col text-right">
+                </div>
+
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+
+                <tbody>
+                  {{#divertedrows}}
+                    <tr>
+                      <td>{{key}}</td>
+                      <td>{{val}}</td>
+                    </tr>
+                  {{/divertedrows}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Settings</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-danger">DANGER ZONE</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              Irrevesably delete this referral:
+              <button type="button" name="button" class="btn btn-sm btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <br><br><br><br><br><br>
 
       <!-- Footer -->

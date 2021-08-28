@@ -204,12 +204,21 @@ app.get("/", function(req, res) {
             `SELECT * FROM refs LEFT JOIN links ON refs.link_id = links.id WHERE refs.id=?;`,
             [req.query.id],
             (err, rows) => {
-              console.log(rows);
               if (rows.length) { //refs exist
                 if (err) return console.log(err); //abort if error
                 let data1 = rows[0];
+                let divertedrows = []
+
+                for (i in data1) {
+                  divertedrows.push({
+                    key: i,
+                    val: data1[i]
+                  })
+                }
+                data1.divertedrows = divertedrows;
                 data1.ua = bowser.parse(data1.full_ua);
-                data1.timeHit=dayjs.unix(data1.timeHit).toNow(true)
+                data1.timeHit = dayjs.unix(data1.timeHit).toNow(true);
+
                 renderFile(`${__dirname}/views/refdetail.html`, data1, (data) => {
                   res.send(data)
                 })
