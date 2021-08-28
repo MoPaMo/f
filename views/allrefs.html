@@ -398,6 +398,7 @@
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
+                        <th scope="col"><i class="fas fa-info"></i></th>
                         <th scope="col">token</th>
                         <th scope="col">OS</th>
                         <th scope="col">Browser</th>
@@ -411,26 +412,29 @@
                       {{#links}}
                         <tr>
                           <th scope="row">
-                            <a href="/?page=detail&token={{token}}">
-                            {{token}}</a>
+                            <a href="/?page=ref&id={{id}}" class="text-reset"><i class="fas fa-info-circle"></i></a>
+                          </th>
+                          <th scope="row">
+                            <a href="/?page=detail&token={{token}}" class="text-reset">
+                              {{token}}</a>
                           </th>
                           <td scope="row">
-                            {{os_name}} {{versionName}}
+                            <a href="/?page=ref&id={{id}}" class="text-reset">{{os_name}} {{versionName}}</a>
                           </td>
                           <td>
-                            {{browser_name}}
+                            <a href="/?page=ref&id={{id}}" class="text-reset">{{browser_name}}</a>
                           </td>
                           <td class="text-center">
-                            <i class="fas fa-{{platType}}"></i>
+                            <a href="/?page=ref&id={{id}}" class="text-reset"><i class="fas fa-{{platType}}"></i></a>
                           </td>
                           <td>
-                            {{lang}}
+                            <a href="/?page=ref&id={{id}}" class="text-reset">{{lang}}</a>
                           </td>
                           <td>
-                            {{referrer}}
+                            <a href="/?page=ref&id={{id}}" class="text-reset">{{referrer}}</a>
                           </td>
                           <td>
-                            {{convDate}}
+                            <a href="/?page=ref&id={{id}}" class="text-reset">{{convDate}}</a>
                           </td>
                         </tr>
                       {{/links}}
