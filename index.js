@@ -247,29 +247,33 @@ app.get("/", function(req, res) {
                       [rows[0].id],
                       (err3, rows3) => {
                         //console.log(rows3);
-                        renderFile(
-                          "views/detail.html", {
-                            basicData: rows[0],
-                            token: req.query.token,
-                            url: rows[0].url,
-                            links: rows2,
-                            count: rows3[`COUNT(id)`],
-                            convDate: function() {
-                              return new Date(this.timeHit * 1000);
-                            },
-                            platform: function() {
-                              switch (this.platType) {
-                                case "mobile":
-                                  return "Mobile";
-                                  break;
-                                case "desktop":
-                                  return "Desktop";
-                                  break;
-                                default:
-                                  return "Unknown";
-                              }
-                            },
+
+                        let data = {
+                          basicData: rows[0],
+                          token: req.query.token,
+                          url: rows[0].url,
+                          links: rows2,
+                          count: rows3[`COUNT(id)`],
+
+                          convDate: function() {
+                            return dayjs.unix(this.timeHit).toNow(true);
                           },
+                          platform: function() {
+                            switch (this.platType) {
+                              case "mobile":
+                                return "Mobile";
+                                break;
+                              case "desktop":
+                                return "Desktop";
+                                break;
+                              default:
+                                return "Unknown";
+                            }
+                          },
+                        };
+                        data.basicData.created = dayjs.unix(data.basicData.created).toNow(true);;
+                        renderFile(
+                          "views/detail.html", data,
                           function(a) {
                             res.send(a);
                           }
