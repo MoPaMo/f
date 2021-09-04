@@ -468,7 +468,21 @@
   <script src="static/js/argon.js?v=1.2.0"></script>
   <script type="text/javascript">
     $(function() {
-      $("#basic-addon3").html(location.hostname + "/")
+      let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+      let string = ""
+      for (let i = 0; i < 6; i++) {
+        string += chars.charAt(Math.floor(Math.random() * (chars.length - 1)))
+      }
+      $.post("/", {
+        context: "checkurl",
+        token: string
+      }).done((data) => {
+        let dat = JSON.parse(data);
+        if (dat.length) {} else {
+          $("#tokenInput").val(string)
+        }
+      });
+      $("#basic-addon3").html(location.hostname + "/");
       $("#tokenInput").on("keyup", function() {
 
         $.post("/", {
