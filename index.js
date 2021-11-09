@@ -515,4 +515,15 @@ app.use(function(req, res) {
 app.listen(port, function(err) {
   if (err) console.log(err);
   console.log("Server listening on PORT", port);
+  fs.appendFile('./log.txt', 'Server restarted: '+dayjs().format()+' ('+dayjs().valueOf()+')\n' , function (err) {
+  if (err) throw err;
+  console.log('Restart Logged!');
+});
+});
+
+process.on('SIGINT', () => {
+  console.log("Closing db, server")
+    db.close();
+    app.close();
+    console.log("Finished!")
 });
